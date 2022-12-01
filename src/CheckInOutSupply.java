@@ -8,11 +8,11 @@
  * @author jmulh
  */
 public class CheckInOutSupply extends javax.swing.JFrame {
-
+    Backend backend = new Backend();
     /**
      * Creates new form CheckInOutSupply
      */
-    public CheckInOutSupply(String sName,String sID) {
+    public CheckInOutSupply(String sName,String sID, String empID) {
         initComponents();
         supplyNameLbl.setText(sName);
         supplySNLbl.setText(sID);
@@ -31,10 +31,10 @@ public class CheckInOutSupply extends javax.swing.JFrame {
         supplyNameLbl = new javax.swing.JLabel();
         supplySNLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        checkedTimeTxt = new javax.swing.JTextField();
         checkInOutBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        conditionTxt = new javax.swing.JTextField();
         checkInBtn = new javax.swing.JRadioButton();
         checkOutBtn = new javax.swing.JRadioButton();
         maintenanceBtn = new javax.swing.JButton();
@@ -96,8 +96,8 @@ public class CheckInOutSupply extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                            .addComponent(jTextField2))))
+                            .addComponent(checkedTimeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(conditionTxt))))
                 .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -119,11 +119,11 @@ public class CheckInOutSupply extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkedTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(conditionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(maintenanceBtn)
                 .addGap(18, 18, 18)
@@ -144,7 +144,7 @@ public class CheckInOutSupply extends javax.swing.JFrame {
     }//GEN-LAST:event_maintenanceBtnActionPerformed
 
     private void checkInOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInOutBtnActionPerformed
-        // TODO add your handling code here:
+        backend.checkDevice(supplySNLbl.getText(), empID, checkedTimeTxt.getText(), conditionTxt.getText(), checkInBtn.isSelected());
     }//GEN-LAST:event_checkInOutBtnActionPerformed
 
     /**
@@ -187,10 +187,10 @@ public class CheckInOutSupply extends javax.swing.JFrame {
     private javax.swing.JRadioButton checkInBtn;
     private javax.swing.JButton checkInOutBtn;
     private javax.swing.JRadioButton checkOutBtn;
+    private javax.swing.JTextField checkedTimeTxt;
+    private javax.swing.JTextField conditionTxt;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton maintenanceBtn;
     private javax.swing.JLabel supplyNameLbl;
     private javax.swing.JLabel supplySNLbl;

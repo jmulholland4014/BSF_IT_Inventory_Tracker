@@ -696,7 +696,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_checkOutBtnActionPerformed
 
     private void checkInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInBtnActionPerformed
-       CheckInOutSupply checkInOutSupply = new CheckInOutSupply(itemNameLbl.getText(), itemText.getText());
+       CheckInOutSupply checkInOutSupply = new CheckInOutSupply(itemNameLbl.getText(), supplierTxt.getText());
         checkInOutSupply.setVisible(true);
     }//GEN-LAST:event_checkInBtnActionPerformed
 

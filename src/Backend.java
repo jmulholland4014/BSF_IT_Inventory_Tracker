@@ -1,3 +1,8 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 
 /*
@@ -14,8 +19,29 @@ public class Backend {
         
     }
     //TODO Connect to Database and Confirm the given username and password are in the db.
-    public boolean verifyLogin(String username, String password){
-        return true;
+    public boolean verifyLogin(String username, String password){        
+        try{
+            Class.forName ("com.mysql.cj.jdbc.Driver");
+        }
+        catch (ClassNotFoundException e) {
+        System.out.println (e);
+        }
+        final String ID = "jandalu1";
+        final String PW = "COSC*jwc87";
+        final String SERVER = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/"+ID+"db";
+
+        try {
+            Connection con = DriverManager.getConnection (SERVER, ID, PW);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery ("Select * from jandalu1db.Admin where username ='" + username + "' and password ='" + password+ "'");
+            while (rs.next ()) {
+                return true;
+            }
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
+        return false;
     }
     //TODO returns a HashMap with varying values depending on the given type. I'd recommend Helper Functions.
     //Using the given ID

@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -18,6 +19,19 @@ public class Backend {
     public Backend(){
         
     }
+    
+    private Connection getConnection() throws SQLException {
+        final String ID = "jandalu1";
+        final String PW = "COSC*jwc87";
+        final String SERVER = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/"+ID+"db";
+        
+        Connection con = DriverManager.getConnection (SERVER, ID, PW);
+        Statement stmt = con.createStatement();
+        stmt.executeQuery ("use jandalu1db;");
+        
+        return con;
+    }
+    
     //TODO Connect to Database and Confirm the given username and password are in the db.
     public boolean verifyLogin(String username, String password){        
         try{
@@ -26,14 +40,11 @@ public class Backend {
         catch (ClassNotFoundException e) {
         System.out.println (e);
         }
-        final String ID = "jandalu1";
-        final String PW = "COSC*jwc87";
-        final String SERVER = "jdbc:mysql://triton.towson.edu:3360/?serverTimezone=EST#/"+ID+"db";
-
+        
         try {
-            Connection con = DriverManager.getConnection (SERVER, ID, PW);
+            Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery ("Select * from jandalu1db.Admin where username ='" + username + "' and password ='" + password+ "'");
+            ResultSet rs = stmt.executeQuery ("Select * from Admin where username ='" + username + "' and password ='" + password+ "'");
             while (rs.next ()) {
                 return true;
             }
@@ -43,6 +54,7 @@ public class Backend {
         }
         return false;
     }
+    
     //TODO returns a HashMap with varying values depending on the given type. I'd recommend Helper Functions.
     //Using the given ID
     //ID could be a name in the case of suppliers.
@@ -52,8 +64,73 @@ public class Backend {
     //If type is "maitenance" return a hashmap with {issue, cost, fixedBy, deviceSN, fixedDate}
     //If type does not equal any of the above return null.
     public HashMap<String,String> fetchPnlObjectItems(String ID, String type){
-        return null;
+        
+        HashMap<String,String> result = new HashMap();
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs;
+
+            switch(type) {
+                // TODO: Update tohandle PCs/Ipads and 
+                case "supplies": 
+                    rs = stmt.executeQuery ("SELECT PC.serial_number, model_name, barcode, status, password " +
+                                            "FROM PC " +
+                                            "JOIN Device using(serial_number) " +
+                                            "WHERE serial_number =  '" + ID + "'");
+                    while (rs.next()) {
+                        result.put("Name", rs.getObject(1).toString());
+                        result.put("Model", rs.getObject(2).toString());
+                        result.put("Device", rs.getObject(3).toString());
+                        result.put("Owner", rs.getObject(4).toString());
+                        result.put("Password", rs.getObject(5).toString());
+                    }
+                    break;
+                case "suppliers":
+                    rs = stmt.executeQuery ("SELECT Name, address, phone, email, " +
+                                            "(SELECT count(*) From Device WHERE supplier_name = Name) AS items_c " +
+                                            "From Supplier" +
+                                            "WHERE Name = '" + ID + "'");
+                    while (rs.next()) {
+                        result.put("Name", rs.getObject(1).toString());
+                        result.put("Address", rs.getObject(2).toString());
+                        result.put("Phone", rs.getObject(3).toString());
+                        result.put("Email", rs.getObject(4).toString());
+                        result.put("itemsSupplied", rs.getObject(5).toString());
+                    }
+                    break;
+                case "users":
+                    rs = stmt.executeQuery ("SELECT name, serial_number " +
+                                            "FROM Employee e " +
+                                            "LEFT OUTER JOIN Check_Out_Record using(Employee_ID) " +
+                                            "WHERE e.Employee_ID = " + ID + "");
+                    while (rs.next()) {
+                        result.put("Name", rs.getObject(1).toString());
+                        result.put("Devices", rs.getObject(2) == null ? "None" : rs.getObject(2).toString());
+                    }
+                    break;
+                case "maintenance":
+                    rs = stmt.executeQuery ("SELECT issue, cost, technician_name, serial_number, fixed_at "+
+                                            "FROM Maintenance_Record "+
+                                            "WHERE record_no= " + ID);
+                    while (rs.next()) {
+                        result.put("issue", rs.getObject(1).toString());
+                        result.put("cost", rs.getObject(2).toString());
+                        result.put("fixedBy", rs.getObject(3).toString());
+                        result.put("deviceSN", rs.getObject(4).toString());
+                        result.put("fixedDate", rs.getObject(5).toString());
+                    }
+                    break;
+                default:
+                   System.err.println ("Invalid Argument!"); 
+            }
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
+        return result;
     }
+    
     //Does the same as fetchPnlObjectItems but uses the given name instead of ID.
     public HashMap<String,String> fetchPnlObjectItemsByName(String name, String type){
         return fetchPnlObjectItems(getEmployeeIDByName(name), type);

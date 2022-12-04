@@ -718,7 +718,24 @@ public class Homepage extends javax.swing.JFrame {
         else{
             System.out.println("Error: No panel is visible");
         }
-        HashMap<String,String> result = backend.fetchPnlObjectItems(itemText.getText(), dataRequested);
+        
+        String ID;
+        switch(dataRequested) {
+            case "supplies":
+                ID = supplyTxt.getText();
+                break;
+            case "suppliers":
+                ID = supplierTxt.getText();
+                break;
+            case "users":
+                ID = empIDText.getText();
+                break;
+            default:
+                ID = mtncIDTxt.getText();
+                break;
+        }
+        
+        HashMap<String,String> result = backend.fetchPnlObjectItems(ID, dataRequested);
         if(result != null){
             if(dataRequested.equals("supplies")){
                 itemNameLbl.setText(result.get("Name")); 
@@ -739,11 +756,11 @@ public class Homepage extends javax.swing.JFrame {
                 empDevicesLbl.setText(result.get("Devices"));
             }
             if(dataRequested.equals("maintenance")){
-                issueLbl.setText("issue");
-                costLbl.setText("cost");
-                fixedByLbl.setText("fixedBy");
-                deviceSNLbl.setText("deviceSN");
-                fixedDateLbl.setText("fixedDate");
+                issueLbl.setText(result.get("issue"));
+                costLbl.setText(result.get("cost"));
+                fixedByLbl.setText(result.get("fixedBy"));
+                deviceSNLbl.setText(result.get("deviceSN"));
+                fixedDateLbl.setText(result.get("fixedDate"));
 
             }
         }

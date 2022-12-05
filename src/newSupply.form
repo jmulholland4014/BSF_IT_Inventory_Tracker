@@ -391,9 +391,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jWarranty">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="a year"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -401,9 +398,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jBarcode">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -411,9 +405,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jModel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -421,9 +412,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jSerial">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1230-9308"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -433,6 +421,7 @@
     <Component class="javax.swing.JTextField" name="jPurchaseDate">
       <Properties>
         <Property name="text" type="java.lang.String" value="2020-01-01"/>
+        <Property name="toolTipText" type="java.lang.String" value="YYYY-MM-DD"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
@@ -442,7 +431,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jCost">
       <Properties>
-        <Property name="text" type="java.lang.String" value="200"/>
+        <Property name="text" type="java.lang.String" value="0.0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
@@ -462,7 +451,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jWeight">
       <Properties>
-        <Property name="text" type="java.lang.String" value="3.1"/>
+        <Property name="text" type="java.lang.String" value="0.0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
@@ -489,9 +478,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField10">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1111"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
@@ -587,9 +573,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jBrand">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Apple"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel19">
       <Properties>
@@ -597,9 +580,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jColor">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel21">
       <Properties>
@@ -608,9 +588,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jIssues">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel20">
       <Properties>
@@ -618,9 +595,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jGraphic">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel22">
       <Properties>
@@ -629,9 +603,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jMemory">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel23">
       <Properties>
@@ -640,7 +611,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jScreenSize">
       <Properties>
-        <Property name="text" type="java.lang.String" value="5"/>
+        <Property name="text" type="java.lang.String" value="0.0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel24">
@@ -649,9 +620,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jStatus">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel25">
       <Properties>
@@ -659,9 +627,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jProcessor">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel26">
       <Properties>
@@ -669,9 +634,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField20">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel27">
       <Properties>
@@ -679,9 +641,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jLocation">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="23 Alabama"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel28">
       <Properties>
@@ -689,9 +648,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField22">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

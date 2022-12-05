@@ -125,27 +125,20 @@ public class newSupply extends javax.swing.JFrame {
 
         jLabel3.setText("Warranty");
 
-        jWarranty.setText("a year");
-
         jLabel4.setText("Barcode");
-
-        jBarcode.setText("test");
 
         jLabel5.setText("Model");
 
-        jModel.setText("test");
-
         jLabel6.setText("Serial Number");
-
-        jSerial.setText("1230-9308");
 
         jLabel7.setText("Purchase Date");
 
         jPurchaseDate.setText("2020-01-01");
+        jPurchaseDate.setToolTipText("YYYY-MM-DD");
 
         jLabel8.setText("Cost");
 
-        jCost.setText("200");
+        jCost.setText("0.0");
 
         jLabel9.setText("Condition");
 
@@ -153,7 +146,7 @@ public class newSupply extends javax.swing.JFrame {
 
         jLabel10.setText("Weight (lb)");
 
-        jWeight.setText("3.1");
+        jWeight.setText("0.0");
 
         jLabel11.setText("Supplier");
 
@@ -167,8 +160,6 @@ public class newSupply extends javax.swing.JFrame {
         });
 
         jLabel12.setText("Passcode");
-
-        jTextField10.setText("1111");
 
         jLabel13.setText("Has Keyboard:");
 
@@ -208,49 +199,29 @@ public class newSupply extends javax.swing.JFrame {
 
         jLabel18.setText("Brand:");
 
-        jBrand.setText("Apple");
-
         jLabel19.setText("Color:");
-
-        jColor.setText("test");
 
         jLabel21.setText("Issues:");
         jLabel21.setToolTipText("");
 
-        jIssues.setText("test");
-
         jLabel20.setText("Graphics Card:");
-
-        jGraphic.setText("test");
 
         jLabel22.setText("Memory:");
         jLabel22.setToolTipText("");
 
-        jMemory.setText("test");
-
         jLabel23.setText("Screen Size");
 
-        jScreenSize.setText("5");
+        jScreenSize.setText("0.0");
 
         jLabel24.setText("Status");
 
-        jStatus.setText("test");
-
         jLabel25.setText("Processor");
-
-        jProcessor.setText("test");
 
         jLabel26.setText("Location");
 
-        jTextField20.setText("test");
-
         jLabel27.setText("Software Version");
 
-        jLocation.setText("23 Alabama");
-
         jLabel28.setText("eMMC:");
-
-        jTextField22.setText("test");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

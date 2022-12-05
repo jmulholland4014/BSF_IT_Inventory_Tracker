@@ -186,7 +186,32 @@ public class Backend {
     }
     //Creates a new employee given the parameters
     //Employee ID should be randomly generated with specific parameters.
-    public void createEmployee(String name, String SSN, String username, String password, String location, int workingHours, int accessLevel){
+    public void createEmployee(String name, String SSN, String username, String password, 
+                               String location, String accessLevel, String email, String phone, 
+                               String address){
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            
+            // Create Employee Entry
+            stmt.executeUpdate("INSERT INTO Employee (SSN, name, address, email, phone, location_address) " +
+                               "VALUES ('" + SSN + "','"+ name +"','"+ address +"','"+ email +"','"+ phone +"','"+ location +"')");
+            
+            // Create Admin entery if necessary
+            if (!accessLevel.equals("Employee")){
+                
+                // Retrieve employee id
+                ResultSet rs = stmt.executeQuery ("SELECT Employee_ID " + 
+                                                  "FROM Employee " +
+                                                  "WHERE SSN = '" + SSN + "'" );
+                rs.next();
+                stmt.executeUpdate("INSERT INTO Admin (Admin_ID, username, password, access_level) " +
+                                   "VALUES ('" + rs.getObject(1).toString() + "','"+ username +"','"+ password +"','"+ accessLevel +"')");
+            }
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
     }
     //Updates the device either checking it in or out.
     public void checkDevice(String ID,String empID, String time, String condition, boolean checkedIn){

@@ -89,7 +89,7 @@ public class Backend {
                 case "suppliers":
                     rs = stmt.executeQuery ("SELECT Name, address, phone, email, " +
                                             "(SELECT count(*) From Device WHERE supplier_name = Name) AS items_c " +
-                                            "From Supplier" +
+                                            "From Supplier " +
                                             "WHERE Name = '" + ID + "'");
                     while (rs.next()) {
                         result.put("Name", rs.getObject(1).toString());

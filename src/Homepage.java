@@ -168,7 +168,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(fixedByLbl)
                 .addGap(119, 119, 119)
                 .addComponent(deviceSNLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(fixedDateLbl)
                 .addGap(40, 40, 40))
         );
@@ -218,7 +218,7 @@ public class Homepage extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(304, Short.MAX_VALUE))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
 
         jPanel1.add(MaintenancePnl, "card2");
@@ -346,7 +346,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Item SN:");
+        jLabel1.setText("Serial Number");
 
         supplyTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -439,7 +439,7 @@ public class Homepage extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        registerSupply.setText("Register Supply");
+        registerSupply.setText("Add Device");
         registerSupply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerSupplyActionPerformed(evt);
@@ -588,7 +588,7 @@ public class Homepage extends javax.swing.JFrame {
 
         sideBarPnl.setBackground(new java.awt.Color(153, 0, 255));
 
-        viewSuppliesBtn.setText("View Supplies");
+        viewSuppliesBtn.setText("View Devices");
         viewSuppliesBtn.setPreferredSize(new java.awt.Dimension(125, 23));
         viewSuppliesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -213,6 +213,79 @@ public class Backend {
             System.err.println (e);
         }
     }
+    
+    public void createDevice(String type, String serial_number, String supplier, String purchase_date,
+                             String barcode, String brand, String condition,
+                             String color, double cost, String issues, String graphic_card,
+                             String memory, String model, String processor, double screen_size,
+                             String status,
+                             String warranty, String location, double weight, String extraField1,
+                             String extraField2, String extraField3,
+                             boolean has_keyboard,
+                             boolean has_mouse,
+                             boolean has_headphones,
+                             boolean has_stylus){
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            
+            
+            // Create Device Entry
+            stmt.executeUpdate("INSERT INTO Device " +
+                               "(serial_number, supplier_name, puchased_date, barcode," +
+                               "brand, `condition`, color, cost, issue, graphic_card," +
+                               "`memory`, model_name, operating_system, processor, " +
+                               "screen_size, `status`, warranty, location_address, weight) " +
+                               "VALUES ('"+ serial_number+"', '" + supplier +"', '" + purchase_date + "'," +
+                                       "'"+ barcode+"', '" + brand +"', '" + condition + "'," +
+                                       "'"+ color +"', " + cost +", '" + issues + "'," +
+                                       "'"+ graphic_card +"', '" + memory +"', '" + model + "'," +
+                                       "'', '" + processor +"', " + screen_size + "," +
+                                       "'"+ status+"', '" + warranty +"', '" + location + "'," + weight + ")");
+//            System.out.println(query);
+            
+            // Create PC/ Ipad / Chromebook entry
+            switch(type)
+            {
+                case "ipad":
+                    stmt.executeUpdate("INSERT INTO IPad (serial_number, model_number, passcode, software_version) " +
+                                       "VALUES ('" + serial_number + "','"+ extraField3 +"','"+ extraField1 +"','"+ extraField2 +"')");
+                    break;
+                case "pc":
+                    stmt.executeUpdate("INSERT INTO PC (serial_number, username, password) " +
+                                       "VALUES ('" + serial_number + "','"+ extraField1 +"','"+ extraField2 +"')");
+                    break;
+                case "chromebook":
+                    stmt.executeUpdate("INSERT INTO Chromebook (serial_number, username, password, eMCC) " +
+                                       "VALUES ('" + serial_number + "','"+ extraField1 +"','"+ extraField2 +"','"+ extraField3 +"')");
+                    break;
+                default:
+                    System.err.println ("Not a valid type");
+            }
+            
+            // Create Accessories entries
+            if (has_keyboard) {
+                stmt.executeUpdate("INSERT INTO Device_Accessories (serial_number, accessory_type) " +
+                                   "VALUES ('" + serial_number + "', 'keyboard')");
+            }
+            if (has_mouse) {
+                stmt.executeUpdate("INSERT INTO Device_Accessories (serial_number, accessory_type) " +
+                                   "VALUES ('" + serial_number + "', 'mouse')");
+            }
+            if (has_headphones) {
+                stmt.executeUpdate("INSERT INTO Device_Accessories (serial_number, accessory_type) " +
+                                   "VALUES ('" + serial_number + "', 'headphones')");
+            }
+            if (has_stylus) {
+                stmt.executeUpdate("INSERT INTO Device_Accessories (serial_number, accessory_type) " +
+                                   "VALUES ('" + serial_number + "', 'stylus')");
+            }
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
+    }
+    
     //Updates the device either checking it in or out.
     public void checkDevice(String ID,String empID, String time, String condition, boolean checkedIn){
     }

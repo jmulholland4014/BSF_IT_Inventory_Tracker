@@ -376,7 +376,7 @@ public class Backend {
             Statement stmt = con.createStatement(); 
         
             stmt.executeUpdate("UPDATE Check_Out_Record SET return_time = NOW(), Admin_ID_checkin = "+ adminId +", " +
-                               "checkout_condition = '" + condition + "' "+
+                               "checkin_condition = '" + condition + "' "+
                                "WHERE serial_number = '" + serial_number + "' AND return_time IS NULL");
             
              stmt.executeUpdate("Update Device " +
@@ -392,7 +392,58 @@ public class Backend {
     //{deviceType, warrantyExpiration, barcode, model, SN, dateAcquired, cost, condition, knownIssues, status, password, hasKeyboard, hasMouse, weight}.
     //For has keyboard and has mouse should return "Yes" or "No".
     public HashMap<String,String> getDeviceInformation(String ID){
-        return null;
+        
+        HashMap<String,String> result = new HashMap();
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs; 
+            rs = stmt.executeQuery ("SELECT * " +
+                                    "FROM Device d " +
+                                    "LEFT OUTER JOIN PC using(serial_number) " +
+                                    "LEFT OUTER JOIN IPad using(serial_number) " +
+                                    "LEFT OUTER JOIN Chromebook using(serial_number) " +
+                                    "WHERE d.serial_number = '" + ID + "'");
+            
+            while (rs.next()){
+                
+                System.out.println (rs.getObject("serial_number").toString());
+                //result.put("serial_number", rs.getObject("serial_number").toString());
+//                String device_type;
+//                        if (rs.getObject(3) != null) {
+//                            device_type = "PC";
+//                            access = rs.getObject(3).toString() + " - " + rs.getObject(4).toString();
+//                        }
+//                        else if (rs.getObject(5) != null) {
+//                            device_type = "IPad";
+//                            access = rs.getObject(5).toString();
+//                        } else {
+//                            device_type = "Chromebook";
+//                            access = rs.getObject(6).toString() + " - " + rs.getObject(7).toString();
+//                        }
+            }
+            
+            rs = stmt.executeQuery ("SELECT DISTINCT accessory_type "+
+                                            "FROM Device_Accessories "+
+                                            "WHERE serial_number= '" + ID+"'");
+            
+            while(rs.next()){
+            
+            } 
+            
+            
+            rs = stmt.executeQuery ("SELECT issue, cost, technician_name, location, fixed_at "+
+                                            "FROM Maintenance_Record "+
+                                            "WHERE serial_number= '" + ID+"' ORDER BY fixed_at DESC LIMIT 3");
+            
+            while(rs.next()){
+            
+            }   
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
+        return result;
     }
     //Updates the device information given the ID and the hashmap of values.
     //HashMap values are {deviceType, warrantyExpiration, barcode, model, SN, dateAcquired, cost, condition, knownIssues, status, password, hasKeyboard, hasMouse, weight}.

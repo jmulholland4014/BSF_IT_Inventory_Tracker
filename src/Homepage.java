@@ -83,15 +83,15 @@ public class Homepage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         supplyTxt = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
-        checkOutBtn = new javax.swing.JButton();
         itemNameLbl = new javax.swing.JLabel();
         itemModelLbl = new javax.swing.JLabel();
         deviceLbl = new javax.swing.JLabel();
         currOwnerLbl = new javax.swing.JLabel();
         passwordLbl = new javax.swing.JLabel();
-        viewItemBtn = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         registerSupply = new javax.swing.JButton();
+        checkOutBtn = new javax.swing.JButton();
+        viewItemBtn = new javax.swing.JButton();
         UsersPnl = new javax.swing.JPanel();
         empIDText = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -370,13 +370,6 @@ public class Homepage extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        checkOutBtn.setText("Check Out/ In");
-        checkOutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkOutBtnActionPerformed(evt);
-            }
-        });
-
         itemNameLbl.setText("Condition");
 
         itemModelLbl.setText("Model");
@@ -387,33 +380,22 @@ public class Homepage extends javax.swing.JFrame {
 
         passwordLbl.setText("Access");
 
-        viewItemBtn.setText("View");
-        viewItemBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewItemBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(checkOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(106, 106, 106)
                 .addComponent(deviceLbl)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(itemModelLbl)
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addComponent(currOwnerLbl)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(passwordLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(itemNameLbl)
-                .addGap(147, 147, 147)
-                .addComponent(viewItemBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,6 +432,20 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        checkOutBtn.setText("Check Out/ In");
+        checkOutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkOutBtnActionPerformed(evt);
+            }
+        });
+
+        viewItemBtn.setText("View");
+        viewItemBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewItemBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SuppliesPnlLayout = new javax.swing.GroupLayout(SuppliesPnl);
         SuppliesPnl.setLayout(SuppliesPnlLayout);
         SuppliesPnlLayout.setHorizontalGroup(
@@ -472,7 +468,13 @@ public class Homepage extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addComponent(searchBtn)
                                 .addGap(41, 41, 41)
-                                .addComponent(registerSupply)))
+                                .addComponent(registerSupply))
+                            .addGroup(SuppliesPnlLayout.createSequentialGroup()
+                                .addGap(298, 298, 298)
+                                .addComponent(checkOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SuppliesPnlLayout.createSequentialGroup()
+                                .addGap(323, 323, 323)
+                                .addComponent(viewItemBtn)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -487,7 +489,11 @@ public class Homepage extends javax.swing.JFrame {
                     .addComponent(registerSupply))
                 .addGap(30, 30, 30)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(785, 785, 785)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkOutBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewItemBtn)
+                .addGap(725, 725, 725)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

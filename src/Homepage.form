@@ -459,6 +459,14 @@
                                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                       <Component id="registerSupply" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
+                                      <Component id="checkOutBtn" min="-2" pref="124" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="323" max="-2" attributes="0"/>
+                                      <Component id="viewItemBtn" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -479,7 +487,11 @@
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="785" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="checkOutBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="viewItemBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="725" max="-2" attributes="0"/>
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -516,21 +528,17 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkOutBtn" min="-2" pref="124" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                           <Component id="deviceLbl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="itemModelLbl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="currOwnerLbl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="passwordLbl" min="-2" pref="110" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="itemNameLbl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="viewItemBtn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="276" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -538,18 +546,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="currOwnerLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="passwordLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="viewItemBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="itemNameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="checkOutBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="deviceLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="itemModelLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="deviceLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="itemModelLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="currOwnerLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="passwordLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="itemNameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
@@ -557,14 +559,6 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="checkOutBtn">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Check Out/ In"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkOutBtnActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JLabel" name="itemNameLbl">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Condition"/>
@@ -590,14 +584,6 @@
                     <Property name="text" type="java.lang.String" value="Access"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="viewItemBtn">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="View"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewItemBtnActionPerformed"/>
-                  </Events>
-                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel5">
@@ -621,6 +607,22 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerSupplyActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="checkOutBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Check Out/ In"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkOutBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="viewItemBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="View"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewItemBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

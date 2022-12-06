@@ -91,6 +91,8 @@ public class newSupply extends javax.swing.JFrame {
         jLocation = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jTextField22 = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jOS = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,6 +225,8 @@ public class newSupply extends javax.swing.JFrame {
 
         jLabel28.setText("eMMC:");
 
+        jLabel29.setText("OS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -230,7 +234,11 @@ public class newSupply extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel29))
+                        .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,15 +289,17 @@ public class newSupply extends javax.swing.JFrame {
                                                     .addComponent(jLabel24)
                                                     .addComponent(jLabel25)
                                                     .addComponent(jLabel26)
-                                                    .addComponent(jLabel27))
-                                                .addGap(10, 10, 10)
+                                                    .addComponent(jLabel28)
+                                                    .addComponent(jLabel12))
+                                                .addGap(53, 53, 53)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jStatus)
-                                                    .addComponent(jTextField20)
+                                                    .addComponent(jLocation)
+                                                    .addComponent(jTextField22)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jProcessor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(0, 0, Short.MAX_VALUE))
-                                                    .addComponent(jLocation)))
+                                                    .addComponent(jTextField10)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel22)
@@ -321,12 +331,9 @@ public class newSupply extends javax.swing.JFrame {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel28))
+                                    .addComponent(jLabel11))
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                                     .addComponent(jSupplier, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jWeight, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jCondition, javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,7 +343,8 @@ public class newSupply extends javax.swing.JFrame {
                                     .addComponent(jModel, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jBarcode, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jWarranty, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
+                                    .addComponent(jTextField20, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jOS, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(302, 302, 302)
                                 .addComponent(jLabel1)))
@@ -425,16 +433,18 @@ public class newSupply extends javax.swing.JFrame {
                         .addComponent(jLabel26)
                         .addComponent(jLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
+                    .addComponent(jLabel29)
+                    .addComponent(jOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel28)
                         .addComponent(jLabel27)
                         .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel28))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
@@ -609,6 +619,7 @@ public class newSupply extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -619,6 +630,7 @@ public class newSupply extends javax.swing.JFrame {
     private javax.swing.JTextField jLocation;
     private javax.swing.JTextField jMemory;
     private javax.swing.JTextField jModel;
+    private javax.swing.JTextField jOS;
     private javax.swing.JTextField jProcessor;
     private javax.swing.JTextField jPurchaseDate;
     private javax.swing.JRadioButton jRadioButton1;

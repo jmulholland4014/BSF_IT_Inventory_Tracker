@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /*
@@ -12,21 +11,29 @@ import java.util.HashMap;
  */
 public class Homepage extends javax.swing.JFrame {
     Backend backend = new Backend();
-    String userID;
+    int userID;
+    String accessLevel;
+    CheckInOutSupply checkOutPnl;
 
     /**
-     * Creates new form Homepage
-     * @param aL
+     * 
+     * @param userID
+     * @param accessLevel 
      */
-    public Homepage(String userID) {
+    public Homepage(int userID, String accessLevel) {
         initComponents();
         setPanelsInvisible();
         this.userID = userID;
-        int accessLevel = backend.getAccessLevelByID(userID);
-        if(accessLevel < backend.getMaxAccessLevel()){
+        this.accessLevel = accessLevel;
+        System.out.println(userID);
+        System.out.println(accessLevel);
+        
+        // Only Supervisors can create users
+        if(accessLevel.equals("Admin")){
             createUserBtn.setVisible(false);
         }
     }
+    
     private void setPanelsInvisible(){
         SuppliesPnl.setVisible(false);
         SuppliersPnl.setVisible(false);
@@ -76,7 +83,6 @@ public class Homepage extends javax.swing.JFrame {
         supplyTxt = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         checkOutBtn = new javax.swing.JButton();
-        checkInBtn = new javax.swing.JButton();
         itemNameLbl = new javax.swing.JLabel();
         itemModelLbl = new javax.swing.JLabel();
         deviceLbl = new javax.swing.JLabel();
@@ -356,17 +362,10 @@ public class Homepage extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        checkOutBtn.setText("Out");
+        checkOutBtn.setText("Check Out/ In");
         checkOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkOutBtnActionPerformed(evt);
-            }
-        });
-
-        checkInBtn.setText("In");
-        checkInBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkInBtnActionPerformed(evt);
             }
         });
 
@@ -393,10 +392,8 @@ public class Homepage extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(checkOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(checkInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(deviceLbl)
                 .addGap(18, 18, 18)
                 .addComponent(itemModelLbl)
@@ -422,7 +419,6 @@ public class Homepage extends javax.swing.JFrame {
                         .addComponent(itemNameLbl))
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(checkOutBtn)
-                        .addComponent(checkInBtn)
                         .addComponent(deviceLbl)
                         .addComponent(itemModelLbl)))
                 .addGap(21, 21, 21))
@@ -453,7 +449,7 @@ public class Homepage extends javax.swing.JFrame {
             .addGroup(SuppliesPnlLayout.createSequentialGroup()
                 .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SuppliesPnlLayout.createSequentialGroup()
-                        .addGap(0, 31, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SuppliesPnlLayout.createSequentialGroup()
                         .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -692,13 +688,8 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_itemTextActionPerformed
 
     private void checkOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutBtnActionPerformed
-        checkInBtnActionPerformed(evt);
+        this.checkOutPnl.setVisible(true);
     }//GEN-LAST:event_checkOutBtnActionPerformed
-
-    private void checkInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInBtnActionPerformed
-       CheckInOutSupply checkInOutSupply = new CheckInOutSupply(itemNameLbl.getText(), supplierTxt.getText(),userID);
-        checkInOutSupply.setVisible(true);
-    }//GEN-LAST:event_checkInBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         System.out.println("Searched");
@@ -743,6 +734,19 @@ public class Homepage extends javax.swing.JFrame {
                 deviceLbl.setText(result.get("Type"));
                 currOwnerLbl.setText(result.get("Status"));
                 passwordLbl.setText(result.get("Access"));
+                
+                if (result.get("Status").equals("UNASSIGNED")) {
+                    checkOutBtn.setText("Check Out");
+                } else {
+                    checkOutBtn.setText("Check In");
+                }
+                
+                // Initialize checkOutPnl
+                if (checkOutPnl == null) {
+                    checkOutPnl = new CheckInOutSupply();
+                }
+                
+                checkOutPnl.initialize(this.userID, result.get("Type"), ID, result.get("Status").equals("UNASSIGNED"));
             }
             if(dataRequested.equals("suppliers")){
                 supplierNameLbl.setText(result.get("Name"));
@@ -893,7 +897,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel SuppliesPnl;
     private javax.swing.JPanel UsersPnl;
     private javax.swing.JButton ViewSuppliersBtn;
-    private javax.swing.JButton checkInBtn;
     private javax.swing.JButton checkOutBtn;
     private javax.swing.JLabel costLbl;
     private javax.swing.JButton createRepairBtn;

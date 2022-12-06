@@ -428,7 +428,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -505,10 +505,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkOutBtn" min="-2" pref="62" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="checkInBtn" min="-2" pref="62" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="checkOutBtn" min="-2" pref="124" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="deviceLbl" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="itemModelLbl" min="-2" max="-2" attributes="0"/>
@@ -537,7 +535,6 @@
                               </Group>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="checkOutBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkInBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="deviceLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="itemModelLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -550,18 +547,10 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="checkOutBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Out"/>
+                    <Property name="text" type="java.lang.String" value="Check Out/ In"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkOutBtnActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="checkInBtn">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="In"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkInBtnActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="itemNameLbl">

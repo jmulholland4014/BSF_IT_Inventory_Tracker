@@ -34,15 +34,8 @@
                       <Component id="supplyNameLbl" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="checkInBtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                              <Component id="checkOutBtn" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="checkInOutBtn" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                      <Component id="supplySNLbl" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -51,26 +44,14 @@
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="checkedTimeTxt" pref="115" max="32767" attributes="0"/>
-                          <Component id="conditionTxt" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jText" min="-2" pref="115" max="-2" attributes="0"/>
+                          <Component id="jCondition" min="-2" pref="115" max="-2" attributes="0"/>
+                          <Component id="checkInOutBtn" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="supplySNLbl" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="maintenanceBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace pref="130" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,23 +65,16 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="checkedTimeTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <Component id="conditionTxt" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
-              <Component id="maintenanceBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="checkInBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="checkOutBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jCondition" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="checkInOutBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace pref="115" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,14 +98,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Time Checked In/Out(Changes based on type)"/>
+        <Property name="text" type="java.lang.String" value="Employee ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="checkedTimeTxt">
+    <Component class="javax.swing.JTextField" name="jText">
     </Component>
     <Component class="javax.swing.JButton" name="checkInOutBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Check In/Out (Changes based on type)"/>
+        <Property name="text" type="java.lang.String" value="Check Out"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkInOutBtnActionPerformed"/>
@@ -139,35 +113,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Condition:"/>
+        <Property name="text" type="java.lang.String" value="Condition"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="conditionTxt">
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="checkInBtn">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="DeviceCheckGrp"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Check In"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="checkOutBtn">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="DeviceCheckGrp"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Check Out"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="maintenanceBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Maintenance?"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maintenanceBtnActionPerformed"/>
-      </Events>
+    <Component class="javax.swing.JTextField" name="jCondition">
     </Component>
   </SubComponents>
 </Form>

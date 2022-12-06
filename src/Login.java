@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author jmulh
@@ -15,7 +17,6 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        jPasswordField1.setText("");
     }
 
     /**
@@ -47,12 +48,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setText("Password:");
 
-        userText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userTextActionPerformed(evt);
-            }
-        });
-
         LoginBtn.setText("Login");
         LoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,13 +56,6 @@ public class Login extends javax.swing.JFrame {
         });
 
         incorrectLoginLabel.setForeground(new java.awt.Color(255, 0, 0));
-
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,26 +107,22 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void userTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userTextActionPerformed
-
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         String username = userText.getText();
-        if (backend.verifyLogin(username, jPasswordField1.getText())){
-            String empID = backend.getEmployeeIDByName(username);
-            Homepage hp = new Homepage(empID);
-            hp.setVisible(true);
-            this.setVisible(false);
-        }
-        else{
+        ResultSet rs = backend.getAdminByCredentials(username, jPasswordField1.getText());
+        if (rs != null){
+            try {
+                rs.next();
+                Homepage hp = new Homepage(Integer.parseInt(rs.getObject(1).toString()), rs.getObject(2).toString());
+                hp.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException e) {
+                System.err.println(e.toString());
+            }
+        } else{
             incorrectLoginLabel.setText("Username or Password incorrect");
         }
     }//GEN-LAST:event_LoginBtnActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     /**
      * @param args the command line arguments

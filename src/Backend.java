@@ -33,7 +33,7 @@ public class Backend {
     }
     
     //TODO Connect to Database and Confirm the given username and password are in the db.
-    public boolean verifyLogin(String username, String password){        
+    public ResultSet getAdminByCredentials(String username, String password){        
         try{
             Class.forName ("com.mysql.cj.jdbc.Driver");
         }
@@ -44,15 +44,12 @@ public class Backend {
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery ("Select * from Admin where username ='" + username + "' and password ='" + password+ "'");
-            while (rs.next ()) {
-                return true;
-            }
+            return stmt.executeQuery ("Select Admin_ID, access_level from Admin where username ='" + username + "' and password ='" + password+ "'");
         }
         catch (SQLException e) {
             System.err.println (e);
         }
-        return false;
+        return null;
     }
     
     //TODO returns a HashMap with varying values depending on the given type. I'd recommend Helper Functions.
@@ -336,8 +333,44 @@ public class Backend {
         }
     }
     
-    //Updates the device either checking it in or out.
-    public void checkDevice(String ID,String empID, String time, String condition, boolean checkedIn){
+    public void checkOutDevice(int empId, int adminId, String serial_number, String condition){ 
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+        
+            // Update Device status field
+        
+            stmt.executeUpdate("INSERT INTO Check_Out_Record (serial_number, Employee_ID, checkout_time, Admin_ID_checkout, checkout_condition) " +
+                               "VALUES ('" + serial_number + "', "+ empId +" , NOW(), '"+ adminId +"', '"+ condition +"')");
+            
+             stmt.executeUpdate("Update Device " +
+                                "SET status = 'ASSIGNED' " +
+                                "WHERE serial_number = '" + serial_number + "'");
+            
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
+    }
+    
+    public void checkInDevice(int adminId, String serial_number, String condition){
+        
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement(); 
+        
+            stmt.executeUpdate("UPDATE Check_Out_Record SET return_time = NOW(), Admin_ID_checkin = "+ adminId +", " +
+                               "checkout_condition = '" + condition + "' "+
+                               "WHERE serial_number = '" + serial_number + "' AND return_time IS NULL");
+            
+             stmt.executeUpdate("Update Device " +
+                                "SET status = 'UNASSIGNED', `condition` = '" + condition +"' " +
+                                "WHERE serial_number = '" + serial_number + "'");
+            
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        } 
     }
     //Returns information about the device. This should be a hashmap with the following values.
     //{deviceType, warrantyExpiration, barcode, model, SN, dateAcquired, cost, condition, knownIssues, status, password, hasKeyboard, hasMouse, weight}.

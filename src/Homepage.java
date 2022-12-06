@@ -121,12 +121,6 @@ public class Homepage extends javax.swing.JFrame {
         MaintenancePnl.setMaximumSize(new java.awt.Dimension(517, 436));
         MaintenancePnl.setPreferredSize(new java.awt.Dimension(517, 436));
 
-        mtncIDTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mtncIDTxtActionPerformed(evt);
-            }
-        });
-
         searchBtn4.setText("Search");
         searchBtn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,12 +234,6 @@ public class Homepage extends javax.swing.JFrame {
         SuppliersPnl.setMaximumSize(new java.awt.Dimension(517, 436));
         SuppliersPnl.setOpaque(false);
         SuppliersPnl.setPreferredSize(new java.awt.Dimension(517, 436));
-
-        supplierTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                supplierTxtActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Supplier Name:");
 
@@ -362,12 +350,6 @@ public class Homepage extends javax.swing.JFrame {
 
         jLabel1.setText("Serial Number");
 
-        supplyTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                supplyTxtActionPerformed(evt);
-            }
-        });
-
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
         itemNameLbl.setText("Condition");
@@ -401,16 +383,12 @@ public class Homepage extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(currOwnerLbl)
-                        .addComponent(passwordLbl)
-                        .addComponent(viewItemBtn)
-                        .addComponent(itemNameLbl))
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(checkOutBtn)
-                        .addComponent(deviceLbl)
-                        .addComponent(itemModelLbl)))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deviceLbl)
+                    .addComponent(itemModelLbl)
+                    .addComponent(currOwnerLbl)
+                    .addComponent(passwordLbl)
+                    .addComponent(itemNameLbl))
                 .addGap(16, 16, 16))
         );
 
@@ -453,7 +431,7 @@ public class Homepage extends javax.swing.JFrame {
             .addGroup(SuppliesPnlLayout.createSequentialGroup()
                 .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SuppliesPnlLayout.createSequentialGroup()
-                        .addGap(0, 11, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SuppliesPnlLayout.createSequentialGroup()
                         .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,12 +480,6 @@ public class Homepage extends javax.swing.JFrame {
 
         UsersPnl.setMaximumSize(new java.awt.Dimension(517, 436));
         UsersPnl.setPreferredSize(new java.awt.Dimension(517, 436));
-
-        empIDText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empIDTextActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Employee ID/Name:");
 

@@ -127,7 +127,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        createRepairBtn.setText("Register Repair");
+        createRepairBtn.setText("Add Record");
         createRepairBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createRepairBtnActionPerformed(evt);
@@ -370,15 +370,15 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        itemNameLbl.setText("NAME");
+        itemNameLbl.setText("Condition");
 
         itemModelLbl.setText("Model");
 
         deviceLbl.setText("Type of Device");
 
-        currOwnerLbl.setText("Who has?");
+        currOwnerLbl.setText("Available");
 
-        passwordLbl.setText("Password: ");
+        passwordLbl.setText("Access");
 
         viewItemBtn.setText("View");
         viewItemBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -396,17 +396,17 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(checkOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(itemNameLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deviceLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(currOwnerLbl)
                 .addGap(18, 18, 18)
                 .addComponent(itemModelLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(31, 31, 31)
+                .addComponent(currOwnerLbl)
+                .addGap(18, 18, 18)
                 .addComponent(passwordLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(itemNameLbl)
+                .addGap(147, 147, 147)
                 .addComponent(viewItemBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -416,15 +416,15 @@ public class Homepage extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(deviceLbl)
                         .addComponent(currOwnerLbl)
-                        .addComponent(itemNameLbl)
-                        .addComponent(itemModelLbl)
                         .addComponent(passwordLbl)
-                        .addComponent(viewItemBtn))
+                        .addComponent(viewItemBtn)
+                        .addComponent(itemNameLbl))
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(checkOutBtn)
-                        .addComponent(checkInBtn)))
+                        .addComponent(checkInBtn)
+                        .addComponent(deviceLbl)
+                        .addComponent(itemModelLbl)))
                 .addGap(21, 21, 21))
         );
 
@@ -453,7 +453,7 @@ public class Homepage extends javax.swing.JFrame {
             .addGroup(SuppliesPnlLayout.createSequentialGroup()
                 .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SuppliesPnlLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 31, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SuppliesPnlLayout.createSequentialGroup()
                         .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -624,7 +624,7 @@ public class Homepage extends javax.swing.JFrame {
         });
         sideBarPnl.add(viewRostersBtn);
 
-        viewRepairsBtn.setText("View Repairs");
+        viewRepairsBtn.setText("Maintenance");
         viewRepairsBtn.setMaximumSize(new java.awt.Dimension(127, 180));
         viewRepairsBtn.setPreferredSize(new java.awt.Dimension(125, 23));
         viewRepairsBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -738,11 +738,11 @@ public class Homepage extends javax.swing.JFrame {
         HashMap<String,String> result = backend.fetchPnlObjectItems(ID, dataRequested);
         if(result != null){
             if(dataRequested.equals("supplies")){
-                itemNameLbl.setText(result.get("Name")); 
+                itemNameLbl.setText(result.get("Condition")); 
                 itemModelLbl.setText(result.get("Model"));
-                deviceLbl.setText(result.get("Device"));
-                currOwnerLbl.setText(result.get("Owner"));
-                passwordLbl.setText(result.get("Password"));
+                deviceLbl.setText(result.get("Type"));
+                currOwnerLbl.setText(result.get("Status"));
+                passwordLbl.setText(result.get("Access"));
             }
             if(dataRequested.equals("suppliers")){
                 supplierNameLbl.setText(result.get("Name"));

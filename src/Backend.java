@@ -74,16 +74,33 @@ public class Backend {
             switch(type) {
                 // TODO: Update tohandle PCs/Ipads and 
                 case "supplies": 
-                    rs = stmt.executeQuery ("SELECT PC.serial_number, model_name, barcode, status, password " +
-                                            "FROM PC " +
-                                            "JOIN Device using(serial_number) " +
-                                            "WHERE serial_number =  '" + ID + "'");
+                    rs = stmt.executeQuery ("SELECT model_name, `condition`, PC.username AS pc_username, PC.password AS pc_password, " +
+                                            "IPad.passcode, Chromebook.username AS c_username, Chromebook.password AS c_password, status " +
+                                            "FROM Device d " +
+                                            "LEFT OUTER JOIN PC using(serial_number) " +
+                                            "LEFT OUTER JOIN IPad using(serial_number) " +
+                                            "LEFT OUTER JOIN Chromebook using(serial_number) " +
+                                            "WHERE d.serial_number = '" + ID + "'");
                     while (rs.next()) {
-                        result.put("Name", rs.getObject(1).toString());
-                        result.put("Model", rs.getObject(2).toString());
-                        result.put("Device", rs.getObject(3).toString());
-                        result.put("Owner", rs.getObject(4).toString());
-                        result.put("Password", rs.getObject(5).toString());
+                        result.put("Model", rs.getObject(1).toString());
+                        result.put("Condition", rs.getObject(2).toString());
+                        result.put("Status", rs.getObject(8).toString());
+                        
+                        String device_type, access;
+                        if (rs.getObject(3) != null) {
+                            device_type = "PC";
+                            access = rs.getObject(3).toString() + " - " + rs.getObject(4).toString();
+                        }
+                        else if (rs.getObject(5) != null) {
+                            device_type = "IPad";
+                            access = rs.getObject(5).toString();
+                        } else {
+                            device_type = "Chromebook";
+                            access = rs.getObject(6).toString() + " - " + rs.getObject(7).toString();
+                        }
+                        
+                        result.put("Type", device_type);
+                        result.put("Access", access);
                     }
                     break;
                 case "suppliers":
@@ -280,6 +297,40 @@ public class Backend {
                 stmt.executeUpdate("INSERT INTO Device_Accessories (serial_number, accessory_type) " +
                                    "VALUES ('" + serial_number + "', 'stylus')");
             }
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
+    }
+    
+    public void createMaintenanceRecord(String serial_number, double cost, String issue, String fixedBy, 
+                               String dateFixed, String location){
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            
+            // Create Employee Entry
+            stmt.executeUpdate("INSERT INTO Maintenance_Record " + 
+                               "(serial_number, cost, issue, location, technician_name, fixed_at) " +
+                               "VALUES ('" + serial_number + "', "+ cost +" , '"+ issue +"','" + location + "', '" +
+                                fixedBy +"', '"+ dateFixed +"')");
+            
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
+    }
+    
+    public void createSupplier(String serial_number, double cost, String issue, String fixedBy, 
+                               String dateFixed){
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            
+            // Create Employee Entry
+            stmt.executeUpdate("INSERT INTO Supplier (SSN, name, address, email, phone, location_address) " +
+                               "VALUES ('" + serial_number + "','"+ cost +"','"+ issue +"','"+ fixedBy +"','"+ dateFixed +"')");
+            
         }
         catch (SQLException e) {
             System.err.println (e);

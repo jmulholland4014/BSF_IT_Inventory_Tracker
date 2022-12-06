@@ -35,12 +35,13 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="twoBtn" min="-2" max="-2" attributes="0"/>
-                          <Component id="threeBtn" min="-2" max="-2" attributes="0"/>
-                          <Component id="oneBtn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="remEmpBtn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="setEmployeeLevel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="updateEmployeeBtn" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="twoBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="oneBtn" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="remEmpBtn" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -57,34 +58,42 @@
                               <Component id="employeeIDText" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="empWorkingHoursLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="empWorkingHoursLbl1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="devicesText" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="empAccessLevelText" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                      <Component id="empWorkingHoursLbl2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="empLocationLbl" max="32767" attributes="0"/>
-                          <Component id="empWorkingHoursFld" max="32767" attributes="0"/>
-                          <Component id="empLocationLbl1" max="32767" attributes="0"/>
-                          <Component id="empWorkingHoursFld2" max="32767" attributes="0"/>
-                          <Component id="empWorkingHoursFld1" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="empWorkingHoursLbl1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="empWorkingHoursLbl2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="userText" min="-2" max="-2" attributes="0"/>
+                                      <Component id="passText" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="empAddrTxt" max="32767" attributes="0"/>
+                                      <Component id="empPhoneNumber" pref="150" max="32767" attributes="0"/>
+                                      <Component id="empEmail" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="empUserFld" pref="150" max="32767" attributes="0"/>
+                                      <Component id="empPassFld" pref="150" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Component id="locationTxt" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -107,50 +116,49 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="employeeSSNText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="devicesText" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="empLocationLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="empWorkingHoursLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="empWorkingHoursFld" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="locationTxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="empLocationLbl1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="empAddrTxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="empWorkingHoursLbl1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="empWorkingHoursFld1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="empEmail" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="empWorkingHoursLbl2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="empWorkingHoursFld2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="empPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="userText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="empUserFld" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="passText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="empPassFld" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="empAccessLevelText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="threeBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="twoBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="oneBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Component id="remEmpBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="setEmployeeLevel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Component id="updateEmployeeBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -170,42 +178,35 @@
         <Property name="text" type="java.lang.String" value="Employee ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Current Devices Owned"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="setEmployeeLevel">
+    <Component class="javax.swing.JButton" name="updateEmployeeBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Update Employee"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setEmployeeLevelActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateEmployeeBtnActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="threeBtn">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="accessLevelButtons"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="3"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="twoBtn">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="accessLevelButtons"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="2"/>
+        <Property name="text" type="java.lang.String" value="Admin"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twoBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="oneBtn">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="accessLevelButtons"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="1"/>
+        <Property name="text" type="java.lang.String" value="User"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="oneBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="remEmpBtn">
       <Properties>
@@ -214,11 +215,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Remove Employee"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="devicesText">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Devices"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="remEmpBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -245,11 +244,6 @@
         <Property name="text" type="java.lang.String" value="Location:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="empWorkingHoursLbl">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Working Hours:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="employeeSSNText">
       <Properties>
         <Property name="text" type="java.lang.String" value="EmployeeSSN"/>
@@ -258,14 +252,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeeSSNTextActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="empLocationLbl">
+    <Component class="javax.swing.JTextField" name="locationTxt">
       <Properties>
         <Property name="text" type="java.lang.String" value="EmployeeLocation"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="empWorkingHoursFld">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Employee Working Hours"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -273,7 +262,7 @@
         <Property name="text" type="java.lang.String" value="Address:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="empLocationLbl1">
+    <Component class="javax.swing.JTextField" name="empAddrTxt">
       <Properties>
         <Property name="text" type="java.lang.String" value="EmployeeAddress"/>
       </Properties>
@@ -283,12 +272,12 @@
         <Property name="text" type="java.lang.String" value="Email:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="empWorkingHoursFld1">
+    <Component class="javax.swing.JTextField" name="empEmail">
       <Properties>
         <Property name="text" type="java.lang.String" value="EmployeeEmail"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="empWorkingHoursFld1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="empEmailActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="empWorkingHoursLbl2">
@@ -296,9 +285,29 @@
         <Property name="text" type="java.lang.String" value="Employee Phone Number:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="empWorkingHoursFld2">
+    <Component class="javax.swing.JTextField" name="empPhoneNumber">
       <Properties>
         <Property name="text" type="java.lang.String" value="EmployeePhoneNumber"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="userText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Username:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="empUserFld">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="EmployeeUserName"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="empPassFld">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="EmployeePassword"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="passText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Password:"/>
       </Properties>
     </Component>
   </SubComponents>

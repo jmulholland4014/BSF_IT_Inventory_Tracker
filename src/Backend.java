@@ -154,50 +154,65 @@ public class Backend {
     public String getEmployeeIDByName(String name){
         return null;
     }
-    //Returns the accessLevel given a user name.
-    public int getAccessLevelByUsername(String username){
-        return 0;
-    }
-    //Returns the employees Name By ID
-    public String getEmployeeNameByID(String ID){
+    public HashMap<String,String> getEmployeeByID(String ID){
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs;
+            HashMap<String,String> result = new HashMap();
+            rs = stmt.executeQuery ("SELECT * FROM Employee WHERE Employee_ID = '" + ID + "'");
+            while (rs.next()) {
+                result.put("Name", rs.getObject(3).toString());
+                result.put("SSN", rs.getObject(1).toString());
+                result.put("Address", rs.getObject(4).toString());
+                result.put("Location", rs.getObject(7).toString());
+                result.put("ID", rs.getObject(2).toString());
+                result.put("Email", rs.getObject(5).toString());
+                result.put("Phone", rs.getObject(6).toString());
+            }
+            rs = stmt.executeQuery("SELECT * from Admin WHERE Admin_ID = '" + ID +"'");
+            while(rs.next()){
+                result.put("Access", rs.getObject(4).toString());
+                result.put("User", rs.getObject(2).toString());
+                result.put("Pass", rs.getObject(3).toString());
+            }
+
+            if(result.get("Access") == null){
+                result.put("Access", "User");
+            }
+            return result;
+        }
+        catch(SQLException e){
+            System.err.println(e);
+        }
         return null;
     }
-    //Returns the Employees SSN by ID
-    public String getEmployeeSSNByID(String ID){
-        return null;
-    }
-    //Returns the devices owned by the employee with the given ID
-    public String[] getEmployeeDevicesByID(String ID){
-        return new String[0];
-    }
-    //Returns the access level of the employee with the given ID
-    public int getAccessLevelByID(String ID){
-        return 0;
-    }
-    //Returns the Max Access Level in the database or this number can be arbitrarily set.
-    public int getMaxAccessLevel(){
-        return 0;
-    }
-    //Returns the location of the employee given the ID
-    public String getEmployeeLocationByID(String ID){
-        return null;
-    }
-    //Returns the employees working hours given the ID
-    public int getEmployeeWorkingHoursByID(String ID){
-        return 0;
-    }
-    //Changes the access Level of an employee given an ID and the new access level.
-    //If ButtonText is "0" then remove that employee from the database.
-    public void setEmployeeAccessLevelByID(String ID, int accessLevel){
-    }
-    //Updates the employees SSN by the given ID
-    public void updateEmployeeSSNByID(String ID, String SSN){
-    }
-    //Updates the employees Location by the given ID
-    public void updateEmployeeLocationByID(String ID, String location){
-    }
-    //Updates the employees working hours by the given ID
-    public void updateEmployeeWorkingHoursByID(String ID, int workingHours){
+
+    public void setEmployeeByID(String ID, String SSN, String location, String address, String email, String phone, int accessLevel, String user, String pass){
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs;
+            rs = stmt.executeQuery("SELECT Admin_ID FROM Admin WHERE Admin_ID = '" + ID +"'");
+            if(rs.next()){
+                if(accessLevel == 1){
+                    stmt.executeUpdate("DELETE FROM Admin WHERE Admin_ID = '" + ID + "'");
+                }
+            }
+            else{
+                if(accessLevel ==2){
+                    stmt.executeUpdate("INSERT INTO Admin (Admin_ID, access_level,username, password) VALUES ('" + ID + "', 'Admin', '" + user + "', '" + pass + "')");
+                }
+                if(accessLevel == 0){
+                    stmt.executeUpdate("DELETE FROM Employee WHERE Employee_ID = " + ID);
+                }
+            }
+            stmt.executeUpdate("UPDATE Employee SET SSN = " + SSN + ", location_address = '" + location + "', address = '" + address + "', email = '" + email + "', phone = '" + phone + "' WHERE Employee_ID = '" + ID + "'");
+            
+        }
+        catch(SQLException e){
+            System.err.println(e);
+        }
     }
     //Creates a new employee given the parameters
     //Employee ID should be randomly generated with specific parameters.

@@ -800,7 +800,7 @@ public class Homepage extends javax.swing.JFrame {
 
     private void viewItemLbl2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemLbl2ActionPerformed
         String empID = empIDText.getText();
-        employee employee = new employee(backend.getAccessLevelByID(empID), backend.getEmployeeNameByID(empID), empID, backend.getEmployeeSSNByID(empID), backend.getEmployeeDevicesByID(empID), backend.getAccessLevelByID(empID));
+        employee employee = new employee(empID);
         employee.setVisible(true);
     }//GEN-LAST:event_viewItemLbl2ActionPerformed
 

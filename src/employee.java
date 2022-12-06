@@ -1,4 +1,5 @@
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import javax.swing.AbstractButton;
 
@@ -17,35 +18,37 @@ public class employee extends javax.swing.JFrame {
     /**
      * Creates new form employee
      */
-    public employee(int al, String name, String ID, String ssn, String[] devices, int employeeAL) {
+    public employee(String ID) {
         initComponents();
-        empID = ID;
-        employeeNameText.setText(name);
-        employeeIDText.setText(ID);
-        if(al == backend.getMaxAccessLevel()){
-            employeeSSNText.setText(ssn);
+        HashMap<String,String> empInfo = backend.getEmployeeByID(ID);
+        employeeNameText.setText(empInfo.get("Name"));
+        employeeIDText.setText(empInfo.get("ID"));
+        employeeSSNText.setText(empInfo.get("SSN"));
+        locationTxt.setText(empInfo.get("Location"));
+        empAddrTxt.setText(empInfo.get("Address"));
+        empEmail.setText(empInfo.get("Email"));
+        empPhoneNumber.setText(empInfo.get("Phone"));
+        empAccessLevelText.setText(empInfo.get("Access"));
+        if(empAccessLevelText.getText().equals("Admin")){
+            oneBtn.setSelected(false);
+            twoBtn.setSelected(true);
+            remEmpBtn.setSelected(false);
+            empUserFld.setText(empInfo.get("User"));
+            empPassFld.setText(empInfo.get("Pass"));
         }
         else{
-            employeeSSNText.setText("*********");
+            oneBtn.setSelected(true);
+            twoBtn.setSelected(false);
+            remEmpBtn.setSelected(false);
+            viewLoginInfo(false);
         }
-        devicesText.setText(buildDevicesString(devices));
-        empAccessLevelText.setText(Integer.toString(employeeAL));
-        empLocationLbl.setText(backend.getEmployeeLocationByID(ID));
-        empWorkingHoursFld.setText(Integer.toString(backend.getEmployeeWorkingHoursByID(ID)));
-
     }
-
-    public String buildDevicesString(String[] devices){
-        String deviceString = "";
-        for(int i = 0; i < devices.length; i++){
-            deviceString += devices[i] + ", ";
-        }
-        if(deviceString == ""){
-            return "None";
-        }
-        return deviceString;
+    public void viewLoginInfo(boolean view){
+        empUserFld.setVisible(view);
+        empPassFld.setVisible(view);
+        userText.setVisible(view);
+        passText.setVisible(view);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,28 +61,27 @@ public class employee extends javax.swing.JFrame {
         accessLevelButtons = new javax.swing.ButtonGroup();
         employeeNameText = new javax.swing.JLabel();
         employeeIDText = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        setEmployeeLevel = new javax.swing.JButton();
-        threeBtn = new javax.swing.JRadioButton();
+        updateEmployeeBtn = new javax.swing.JButton();
         twoBtn = new javax.swing.JRadioButton();
         oneBtn = new javax.swing.JRadioButton();
         remEmpBtn = new javax.swing.JRadioButton();
-        devicesText = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         empAccessLevelText = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        empWorkingHoursLbl = new javax.swing.JLabel();
         employeeSSNText = new javax.swing.JTextField();
-        empLocationLbl = new javax.swing.JTextField();
-        empWorkingHoursFld = new javax.swing.JTextField();
+        locationTxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        empLocationLbl1 = new javax.swing.JTextField();
+        empAddrTxt = new javax.swing.JTextField();
         empWorkingHoursLbl1 = new javax.swing.JLabel();
-        empWorkingHoursFld1 = new javax.swing.JTextField();
+        empEmail = new javax.swing.JTextField();
         empWorkingHoursLbl2 = new javax.swing.JLabel();
-        empWorkingHoursFld2 = new javax.swing.JTextField();
+        empPhoneNumber = new javax.swing.JTextField();
+        userText = new javax.swing.JLabel();
+        empUserFld = new javax.swing.JTextField();
+        empPassFld = new javax.swing.JTextField();
+        passText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,28 +90,36 @@ public class employee extends javax.swing.JFrame {
 
         employeeIDText.setText("Employee ID");
 
-        jLabel3.setText("Current Devices Owned");
-
-        setEmployeeLevel.setText("Update Employee");
-        setEmployeeLevel.addActionListener(new java.awt.event.ActionListener() {
+        updateEmployeeBtn.setText("Update Employee");
+        updateEmployeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setEmployeeLevelActionPerformed(evt);
+                updateEmployeeBtnActionPerformed(evt);
             }
         });
 
-        accessLevelButtons.add(threeBtn);
-        threeBtn.setText("3");
-
         accessLevelButtons.add(twoBtn);
-        twoBtn.setText("2");
+        twoBtn.setText("Admin");
+        twoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                twoBtnActionPerformed(evt);
+            }
+        });
 
         accessLevelButtons.add(oneBtn);
-        oneBtn.setText("1");
+        oneBtn.setText("User");
+        oneBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                oneBtnActionPerformed(evt);
+            }
+        });
 
         accessLevelButtons.add(remEmpBtn);
         remEmpBtn.setText("Remove Employee");
-
-        devicesText.setText("Devices");
+        remEmpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remEmpBtnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Current Access Level:");
 
@@ -121,8 +131,6 @@ public class employee extends javax.swing.JFrame {
 
         jLabel5.setText("Location:");
 
-        empWorkingHoursLbl.setText("Working Hours:");
-
         employeeSSNText.setText("EmployeeSSN");
         employeeSSNText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,26 +138,32 @@ public class employee extends javax.swing.JFrame {
             }
         });
 
-        empLocationLbl.setText("EmployeeLocation");
-
-        empWorkingHoursFld.setText("Employee Working Hours");
+        locationTxt.setText("EmployeeLocation");
 
         jLabel6.setText("Address:");
 
-        empLocationLbl1.setText("EmployeeAddress");
+        empAddrTxt.setText("EmployeeAddress");
 
         empWorkingHoursLbl1.setText("Email:");
 
-        empWorkingHoursFld1.setText("EmployeeEmail");
-        empWorkingHoursFld1.addActionListener(new java.awt.event.ActionListener() {
+        empEmail.setText("EmployeeEmail");
+        empEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empWorkingHoursFld1ActionPerformed(evt);
+                empEmailActionPerformed(evt);
             }
         });
 
         empWorkingHoursLbl2.setText("Employee Phone Number:");
 
-        empWorkingHoursFld2.setText("EmployeePhoneNumber");
+        empPhoneNumber.setText("EmployeePhoneNumber");
+
+        userText.setText("Username:");
+
+        empUserFld.setText("EmployeeUserName");
+
+        empPassFld.setText("EmployeePassword");
+
+        passText.setText("Password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,12 +176,12 @@ public class employee extends javax.swing.JFrame {
                         .addComponent(employeeNameText))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(193, 193, 193)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(twoBtn)
-                            .addComponent(threeBtn)
-                            .addComponent(oneBtn)
-                            .addComponent(remEmpBtn)
-                            .addComponent(setEmployeeLevel)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(updateEmployeeBtn)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(twoBtn)
+                                .addComponent(oneBtn)
+                                .addComponent(remEmpBtn))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,30 +193,34 @@ public class employee extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(employeeIDText))
-                            .addComponent(jLabel5)
-                            .addComponent(empWorkingHoursLbl)
-                            .addComponent(jLabel6)
-                            .addComponent(empWorkingHoursLbl1)))
+                            .addComponent(jLabel5)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(152, 152, 152)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(devicesText))
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(empAccessLevelText))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
-                        .addComponent(empWorkingHoursLbl2)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(empLocationLbl)
-                            .addComponent(empWorkingHoursFld)
-                            .addComponent(empLocationLbl1)
-                            .addComponent(empWorkingHoursFld2)
-                            .addComponent(empWorkingHoursFld1))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(52, 52, 52)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(empWorkingHoursLbl1)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(empWorkingHoursLbl2)
+                                        .addComponent(userText)
+                                        .addComponent(passText))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(empAddrTxt)
+                                        .addComponent(empPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(empEmail)
+                                        .addComponent(empUserFld, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(empPassFld, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
+                            .addComponent(locationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -218,86 +236,82 @@ public class employee extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(employeeSSNText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(devicesText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(empLocationLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(empWorkingHoursLbl)
-                    .addComponent(empWorkingHoursFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(locationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(empLocationLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(empAddrTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(empWorkingHoursLbl1)
-                    .addComponent(empWorkingHoursFld1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(empEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(empWorkingHoursLbl2)
-                    .addComponent(empWorkingHoursFld2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(empPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userText)
+                    .addComponent(empUserFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passText)
+                    .addComponent(empPassFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(empAccessLevelText))
-                .addGap(18, 18, 18)
-                .addComponent(threeBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(twoBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(oneBtn)
                 .addGap(3, 3, 3)
                 .addComponent(remEmpBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(setEmployeeLevel)
+                .addGap(45, 45, 45)
+                .addComponent(updateEmployeeBtn)
                 .addGap(41, 41, 41))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setEmployeeLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setEmployeeLevelActionPerformed
-        for(Enumeration<AbstractButton> buttons = accessLevelButtons.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-            String buttonText = button.getText();
-            if (buttonText.equals("Remove Employee")) {
-                buttonText = "0";
-            }
-
-            if(button.isSelected()) {
-                backend.setEmployeeAccessLevelByID(empID, Integer.parseInt(buttonText));
-                empAccessLevelText.setText(Integer.toString(backend.getAccessLevelByID(empID)));
-            }
+    private void updateEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeBtnActionPerformed
+        int accessLevel;
+        if(twoBtn.isSelected()){
+            accessLevel = 2;
         }
-        int workingHours = backend.getEmployeeWorkingHoursByID(empID);
-        try{
-            workingHours = Integer.parseInt(empWorkingHoursFld.getText());
+        else if(oneBtn.isSelected()){
+            accessLevel = 1;
         }
-        catch (NumberFormatException e){
-            System.out.println("Invalid input");
+        else{
+            accessLevel = 0;
         }
-        backend.updateEmployeeSSNByID(empID, employeeSSNText.getText());
-        backend.updateEmployeeLocationByID(empID, empLocationLbl.getText());
-        backend.updateEmployeeWorkingHoursByID(empID, workingHours);
-        employeeSSNText.setText(backend.getEmployeeSSNByID(empID));
-        empLocationLbl.setText(backend.getEmployeeLocationByID(empID));
-        empWorkingHoursFld.setText(Integer.toString(backend.getEmployeeWorkingHoursByID(empID)));
+        backend.setEmployeeByID(employeeIDText.getText(), employeeSSNText.getText(),locationTxt.getText(), empAddrTxt.getText(), empEmail.getText(), empPhoneNumber.getText(), accessLevel,empUserFld.getText(), empPassFld.getText() );
         this.setVisible(false);
-    }//GEN-LAST:event_setEmployeeLevelActionPerformed
+    }//GEN-LAST:event_updateEmployeeBtnActionPerformed
 
     private void employeeSSNTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSSNTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_employeeSSNTextActionPerformed
 
-    private void empWorkingHoursFld1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empWorkingHoursFld1ActionPerformed
+    private void empEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_empWorkingHoursFld1ActionPerformed
+    }//GEN-LAST:event_empEmailActionPerformed
+
+    private void twoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoBtnActionPerformed
+        viewLoginInfo(true);
+    }//GEN-LAST:event_twoBtnActionPerformed
+
+    private void oneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneBtnActionPerformed
+        viewLoginInfo(false);
+    }//GEN-LAST:event_oneBtnActionPerformed
+
+    private void remEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remEmpBtnActionPerformed
+        viewLoginInfo(false);
+    }//GEN-LAST:event_remEmpBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,14 +350,12 @@ public class employee extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup accessLevelButtons;
-    private javax.swing.JLabel devicesText;
     private javax.swing.JLabel empAccessLevelText;
-    private javax.swing.JTextField empLocationLbl;
-    private javax.swing.JTextField empLocationLbl1;
-    private javax.swing.JTextField empWorkingHoursFld;
-    private javax.swing.JTextField empWorkingHoursFld1;
-    private javax.swing.JTextField empWorkingHoursFld2;
-    private javax.swing.JLabel empWorkingHoursLbl;
+    private javax.swing.JTextField empAddrTxt;
+    private javax.swing.JTextField empEmail;
+    private javax.swing.JTextField empPassFld;
+    private javax.swing.JTextField empPhoneNumber;
+    private javax.swing.JTextField empUserFld;
     private javax.swing.JLabel empWorkingHoursLbl1;
     private javax.swing.JLabel empWorkingHoursLbl2;
     private javax.swing.JLabel employeeIDText;
@@ -351,14 +363,15 @@ public class employee extends javax.swing.JFrame {
     private javax.swing.JTextField employeeSSNText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField locationTxt;
     private javax.swing.JRadioButton oneBtn;
+    private javax.swing.JLabel passText;
     private javax.swing.JRadioButton remEmpBtn;
-    private javax.swing.JButton setEmployeeLevel;
-    private javax.swing.JRadioButton threeBtn;
     private javax.swing.JRadioButton twoBtn;
+    private javax.swing.JButton updateEmployeeBtn;
+    private javax.swing.JLabel userText;
     // End of variables declaration//GEN-END:variables
 }

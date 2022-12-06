@@ -321,15 +321,14 @@ public class Backend {
         }
     }
     
-    public void createSupplier(String serial_number, double cost, String issue, String fixedBy, 
-                               String dateFixed){
+    public void createSupplier(String Name, String Address, String Phone, String Email){
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
             
             // Create Employee Entry
-            stmt.executeUpdate("INSERT INTO Supplier (SSN, name, address, email, phone, location_address) " +
-                               "VALUES ('" + serial_number + "','"+ cost +"','"+ issue +"','"+ fixedBy +"','"+ dateFixed +"')");
+            stmt.executeUpdate("INSERT INTO Supplier (Name, address, email, phone) " +
+                               "VALUES ('" + Name + "', '"+ Address +"', '"+ Email +"', '"+ Phone +"')");
             
         }
         catch (SQLException e) {

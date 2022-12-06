@@ -540,6 +540,7 @@ public class newSupply extends javax.swing.JFrame {
                              jRadioButton6.isSelected(),
                              jRadioButton8.isSelected(),
                              jRadioButton10.isSelected());
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
  
     /**

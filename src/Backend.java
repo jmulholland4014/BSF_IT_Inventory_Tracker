@@ -124,7 +124,7 @@ public class Backend {
                     }
                     break;
                 case "maintenance":
-                    rs = stmt.executeQuery ("SELECT issue, cost, technician_name, serial_number, fixed_at "+
+                    rs = stmt.executeQuery ("SELECT issue, cost, technician_name, serial_number, fixed_at, location "+
                                             "FROM Maintenance_Record "+
                                             "WHERE record_no= " + ID);
                     while (rs.next()) {
@@ -133,6 +133,7 @@ public class Backend {
                         result.put("fixedBy", rs.getObject(3).toString());
                         result.put("deviceSN", rs.getObject(4).toString());
                         result.put("fixedDate", rs.getObject(5).toString());
+                        result.put("location", rs.getObject(6).toString());
                     }
                     break;
                 default:

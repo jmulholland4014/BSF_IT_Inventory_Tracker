@@ -288,6 +288,7 @@ public class employee extends javax.swing.JFrame {
         employeeSSNText.setText(backend.getEmployeeSSNByID(empID));
         empLocationLbl.setText(backend.getEmployeeLocationByID(empID));
         empWorkingHoursFld.setText(Integer.toString(backend.getEmployeeWorkingHoursByID(empID)));
+        this.setVisible(false);
     }//GEN-LAST:event_setEmployeeLevelActionPerformed
 
     private void employeeSSNTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSSNTextActionPerformed

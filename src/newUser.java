@@ -227,6 +227,7 @@ public class newUser extends javax.swing.JFrame {
                 empEmail.getText(),
                 empPhone.getText(),
                 empAddress.getText());
+        this.setVisible(false);
     }//GEN-LAST:event_createUserBtnActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed

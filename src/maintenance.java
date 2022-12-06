@@ -19,7 +19,15 @@ public class maintenance extends javax.swing.JFrame {
     public maintenance(String ID) {
         initComponents();
     }
-    
+    public maintenance(String issue, String cost, String fixedBy, String deviceSN, String fixedDate, String location){
+        initComponents();
+        jSNTxt.setText(deviceSN);
+        jIssue.setText(issue);
+        jCost.setText(cost);
+        jFixedBy.setText(fixedBy);
+        jDate.setText(fixedDate);
+        jLocation.setText(location);
+    }
     public maintenance(){
         initComponents();
     }
@@ -35,7 +43,7 @@ public class maintenance extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jSN = new javax.swing.JTextField();
+        jSNTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jIssue = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -87,7 +95,7 @@ public class maintenance extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(128, 128, 128)
-                                .addComponent(jSN, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jSNTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4)
@@ -121,7 +129,7 @@ public class maintenance extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSNTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -155,14 +163,15 @@ public class maintenance extends javax.swing.JFrame {
         double cost = Double.parseDouble(jCost.getText());
         
         // Validate serial_number
-        HashMap<String,String> result = backend.fetchPnlObjectItems(jSN.getText(), "supplies");
+        HashMap<String,String> result = backend.fetchPnlObjectItems(jSNTxt.getText(), "supplies");
         if(result.isEmpty()) {
             JOptionPane.showMessageDialog(new javax.swing.JFrame(), 
                                           "Invalid Device Serial Number!",
                                           "Error", JOptionPane.ERROR_MESSAGE);
         } else  {
-            backend.createMaintenanceRecord(jSN.getText(), cost, jIssue.getText(), jFixedBy.getText(), jDate.getText(), jLocation.getText());
+            backend.createMaintenanceRecord(jSNTxt.getText(), cost, jIssue.getText(), jFixedBy.getText(), jDate.getText(), jLocation.getText());
         }
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -214,6 +223,6 @@ public class maintenance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jLocation;
-    private javax.swing.JTextField jSN;
+    private javax.swing.JTextField jSNTxt;
     // End of variables declaration//GEN-END:variables
 }

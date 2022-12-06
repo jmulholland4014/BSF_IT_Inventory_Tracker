@@ -122,6 +122,7 @@ public class CheckInOutSupply extends javax.swing.JFrame {
         } else {
             backend.checkOutDevice(Integer.parseInt(jText.getText()), adminId, this.serialNumber, jCondition.getText());
         }
+        this.setVisible(false);
     }//GEN-LAST:event_checkInOutBtnActionPerformed
 
     /**

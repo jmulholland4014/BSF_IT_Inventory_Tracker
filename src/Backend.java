@@ -250,7 +250,7 @@ public class Backend {
                              String memory, String model, String processor, double screen_size,
                              String status,
                              String warranty, String location, double weight, String extraField1,
-                             String extraField2, String extraField3,
+                             String extraField2, String extraField3, String os,
                              boolean has_keyboard,
                              boolean has_mouse,
                              boolean has_headphones,
@@ -269,10 +269,9 @@ public class Backend {
                                "VALUES ('"+ serial_number+"', '" + supplier +"', '" + purchase_date + "'," +
                                        "'"+ barcode+"', '" + brand +"', '" + condition + "'," +
                                        "'"+ color +"', " + cost +", '" + issues + "'," +
-                                       "'"+ graphic_card +"', '" + memory +"', '" + model + "'," +
-                                       "'', '" + processor +"', " + screen_size + "," +
-                                       "'"+ status+"', '" + warranty +"', '" + location + "'," + weight + ")");
-//            System.out.println(query);
+                                       "'"+ graphic_card +"', '" + memory +"', '" + model + "', " +
+                                       "'" + os + "', '" + processor +"', " + screen_size + "," +
+                                       "'"+ status+"', '" + warranty +"', '" + location + "', " + weight + " )");
             
             // Create PC/ Ipad / Chromebook entry
             switch(type)
@@ -406,21 +405,48 @@ public class Backend {
                                     "WHERE d.serial_number = '" + ID + "'");
             
             while (rs.next()){
+                result.put("serial_number", ID);
+                result.put("supplier", rs.getObject("supplier_name").toString());
+                result.put("purchase_date", rs.getObject("puchased_date").toString());
+                result.put("barcode", rs.getObject("barcode").toString());
+                result.put("brand", rs.getObject("brand").toString());
+                result.put("condition", rs.getObject("condition").toString());
+                result.put("color", rs.getObject("color").toString());
+                result.put("cost", rs.getObject("cost").toString());
+                result.put("issue", rs.getObject("issue").toString());
+                result.put("graphic_card", rs.getObject("graphic_card").toString());
+                result.put("memory", rs.getObject("memory").toString());
+                result.put("model", rs.getObject("model_name").toString());
+                result.put("os", rs.getObject("operating_system").toString());
+                result.put("processor", rs.getObject("processor").toString());
+                result.put("screen_size", rs.getObject("screen_size").toString());
+                result.put("status", rs.getObject("status").toString());
+                result.put("warranty", rs.getObject("warranty").toString());
+                result.put("weight", rs.getObject("weight").toString());
+                result.put("location", rs.getObject("location_address").toString());
                 
-                System.out.println (rs.getObject("serial_number").toString());
-                //result.put("serial_number", rs.getObject("serial_number").toString());
-//                String device_type;
-//                        if (rs.getObject(3) != null) {
-//                            device_type = "PC";
-//                            access = rs.getObject(3).toString() + " - " + rs.getObject(4).toString();
-//                        }
-//                        else if (rs.getObject(5) != null) {
-//                            device_type = "IPad";
-//                            access = rs.getObject(5).toString();
-//                        } else {
-//                            device_type = "Chromebook";
-//                            access = rs.getObject(6).toString() + " - " + rs.getObject(7).toString();
-//                        }
+                if (rs.getObject("eMCC") == null && rs.getObject("eMCC") == null) {
+                    
+                    result.put("type", "PC");
+                    
+                    result.put("extraField1", rs.getObject("PC.username").toString());
+                    result.put("extraField2", rs.getObject("PC.password").toString());
+                    
+                } else if (rs.getObject("eMCC") == null) {
+                    
+                    result.put("type", "IPad");
+                    
+                    result.put("extraField1", rs.getObject("passcode").toString());
+                    result.put("extraField2", rs.getObject("software_version").toString());
+                    result.put("extraField3", rs.getObject("model_number").toString());
+                } else {
+                    
+                    result.put("type", "Chromebook");
+                    
+                    result.put("extraField1", rs.getObject("Chromebook.username").toString());
+                    result.put("extraField2", rs.getObject("Chromebook.password").toString());
+                    result.put("extraField3", rs.getObject("eMCC").toString());
+                }
             }
             
             rs = stmt.executeQuery ("SELECT DISTINCT accessory_type "+
@@ -428,7 +454,7 @@ public class Backend {
                                             "WHERE serial_number= '" + ID+"'");
             
             while(rs.next()){
-            
+                result.put(rs.getObject("accessory_type").toString(), "");
             } 
             
             
@@ -436,8 +462,42 @@ public class Backend {
                                             "FROM Maintenance_Record "+
                                             "WHERE serial_number= '" + ID+"' ORDER BY fixed_at DESC LIMIT 3");
             
+            int i =1;
             while(rs.next()){
+                
+                result.put("mRecord" + i + "."+"issue", rs.getObject("issue").toString());
+                result.put("mRecord" + i + "."+"cost", rs.getObject("cost").toString());
+                result.put("mRecord" + i + "."+"by", rs.getObject("technician_name").toString());
+                result.put("mRecord" + i + "."+"location", rs.getObject("location").toString());
+                result.put("mRecord" + i + "."+"at", rs.getObject("fixed_at").toString());
+            }   
             
+             rs = stmt.executeQuery ("SELECT checkout_time, return_time, checkout_condition, checkin_condition, " +
+                                            "(SELECT name FROM Employee WHERE Employee_ID = Employee_ID limit 1) AS checked_to, " +
+                                            "(SELECT name FROM Employee WHERE Employee_ID = Admin_ID_checkout limit 1) AS checked_out_by, " +
+                                            "(SELECT name FROM Employee WHERE Employee_ID = Admin_ID_checkin limit 1) AS checked_in_by " +
+                                            "FROM Check_Out_Record " +
+                                            "WHERE serial_number= '"+ ID +"' " +
+                                            "ORDER BY checkout_time DESC LIMIT 1;");
+            
+            while(rs.next()){
+                
+                result.put("checked_to", rs.getObject("checked_to").toString());
+                result.put("checkout_time", rs.getObject("checkout_time").toString());
+                result.put("out_condition", rs.getObject("checkout_condition").toString());
+                result.put("admin_out", rs.getObject("checked_out_by").toString());
+                
+                if (rs.getObject("checkin_condition") != null) {
+                    result.put("in_condition", rs.getObject("checkin_condition").toString());
+                }
+                
+                if (rs.getObject("checked_in_by") != null) {
+                    result.put("admin_in", rs.getObject("checked_in_by").toString());
+                }
+                
+                if (rs.getObject("return_time") != null) {
+                    result.put("return_time", rs.getObject("return_time").toString());
+                }
             }   
         }
         catch (SQLException e) {
@@ -447,8 +507,96 @@ public class Backend {
     }
     //Updates the device information given the ID and the hashmap of values.
     //HashMap values are {deviceType, warrantyExpiration, barcode, model, SN, dateAcquired, cost, condition, knownIssues, status, password, hasKeyboard, hasMouse, weight}.
-    public void updateDeviceInformation(String ID, HashMap<String,String> deviceInfo){
+    public void updateDeviceInformation(String type, String serial_number, String supplier, String purchase_date,
+                             String barcode, String brand, String condition,
+                             String color, double cost, String issues, String graphic_card,
+                             String memory, String model, String processor, double screen_size,
+                             String status, String os,
+                             String warranty, String location, double weight, String extraField1,
+                             String extraField2, String extraField3,
+                             boolean has_keyboard,
+                             boolean has_mouse,
+                             boolean has_headphones,
+                             boolean has_stylus){
+        
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            
+            // Create Device Entry
+            stmt.executeUpdate("UPDATE Device " +
+                               "SET supplier_name = '" + supplier +"', puchased_date = '"+ purchase_date + "', " +
+                               "barcode = '" + barcode + "', "+
+                               "brand = '" + brand + "', "+
+                               "`condition` = '" + condition + "', "+
+                               "color = '" + color + "', "+
+                               "cost = " + cost + " , "+
+                               "issue = '" + issues + "', "+
+                               "graphic_card = '" + graphic_card + "', "+
+                               "`memory` = '" + memory + "', "+
+                               "model_name = '" + model + "', "+
+                               "operating_system = '" + os + "', "+
+                               "processor = '" + processor + "', "+
+                               "screen_size = " + screen_size + " , "+
+                               "`status` = '" + status + "', "+
+                               "warranty = '" + warranty + "', "+
+                               "location_address = '" + location + "', "+
+                               "weight= " + weight + " "+
+                               "WHERE serial_number = '" + serial_number + "'");
+            
+            if (type.equals("PC")) {
+                stmt.executeUpdate("UPDATE PC " +
+                                   "SET username = '" + extraField1 +"', password = '"+ extraField2 + "' " +
+                                   "WHERE serial_number = '" + serial_number + "'");
+            }
+            
+            if (type.equals("Chromebook")) {
+                stmt.executeUpdate("UPDATE Chromebook " +
+                                   "SET username = '" + extraField1 +"', password = '"+ extraField2 + "', " +
+                                   "eMCC = '" + extraField3 + "' "+
+                                   "WHERE serial_number = '" + serial_number + "'");
+            }
+            
+            if (type.equals("IPad")) {
+                stmt.executeUpdate("UPDATE IPad " +
+                                   "SET model_number = '" + extraField1 +"', passcode = '"+ extraField2 + "', " +
+                                   "software_version = '" + extraField3 + "' "+
+                                   "WHERE serial_number = '" + serial_number + "'");
+            }
+            
+            updateAccessory(serial_number, "keyboard", has_keyboard);
+            updateAccessory(serial_number, "mouse", has_mouse);
+            updateAccessory(serial_number, "headphones", has_headphones);
+            updateAccessory(serial_number, "stylus", has_stylus);
+            
+        } catch (SQLException e) {
+            System.err.println (e);
+        } 
+        
     }
+    
+    private void updateAccessory(String serial_number, String accessory, boolean has_accessory) {
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            
+            if (has_accessory) { 
+                stmt.executeUpdate("INSERT INTO Device_Accessories (serial_number, accessory_type) " +
+                                    "SELECT * FROM (SELECT '" + serial_number + "' AS serial_number, '" + accessory + "' AS accessory_type) AS temp " +
+                                    "WHERE NOT EXISTS (" +
+                                    "SELECT * FROM Device_Accessories WHERE serial_number = '" + serial_number + "' AND accessory_type = '"+accessory+"'" +
+                                    ") LIMIT 1;");
+
+            } else {
+                 stmt.executeUpdate("DELETE FROM Device_Accessories " +
+                                   "WHERE serial_number = '" + serial_number + "' AND accessory_type = '" + accessory + "'");
+            }
+            
+        } catch (SQLException e) {
+            System.err.println (e);
+        } 
+    }
+    
     //Returns a HashMap of Supplier information given the name.
     //{address, phone, devicesSupplied, email}
     //devicesSupplied should be a comma separated list of devices.

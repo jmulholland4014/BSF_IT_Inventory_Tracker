@@ -411,6 +411,7 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         checkOutBtn.setText("Check Out/ In");
+        checkOutBtn.setEnabled(false);
         checkOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkOutBtnActionPerformed(evt);
@@ -418,6 +419,7 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         viewItemBtn.setText("View");
+        viewItemBtn.setEnabled(false);
         viewItemBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewItemBtnActionPerformed(evt);
@@ -733,6 +735,8 @@ public class Homepage extends javax.swing.JFrame {
                 }
                 
                 checkOutPnl.initialize(this.userID, result.get("Type"), ID, result.get("Status").equals("UNASSIGNED"));
+                viewItemBtn.setEnabled(true);
+                checkOutBtn.setEnabled(true);
             }
             if(dataRequested.equals("suppliers")){
                 supplierNameLbl.setText(result.get("Name"));
@@ -833,8 +837,8 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_registerSupplyActionPerformed
 
     private void viewSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSupplierBtnActionPerformed
-        supplier supplier = new supplier(supplierNameLbl.getText());
-        supplier.setVisible(true);
+        newSupplier newSupplier = new newSupplier();
+        newSupplier.setVisible(true);
     }//GEN-LAST:event_viewSupplierBtnActionPerformed
 
     private void createSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createSupplierBtnActionPerformed

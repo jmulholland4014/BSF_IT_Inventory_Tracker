@@ -603,6 +603,7 @@
             <Component class="javax.swing.JButton" name="checkOutBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Check Out/ In"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkOutBtnActionPerformed"/>
@@ -611,6 +612,7 @@
             <Component class="javax.swing.JButton" name="viewItemBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="View"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewItemBtnActionPerformed"/>

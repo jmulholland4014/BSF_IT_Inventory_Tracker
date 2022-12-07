@@ -25,6 +25,8 @@ public class CheckInOutSupply extends javax.swing.JFrame {
         if (checkOut) {
             checkInOutBtn.setText("Check Out");
             jLabel3.setText("Employee ID");
+            jLabel3.setVisible(true);
+            jText.setVisible(true);
         } else {
             checkInOutBtn.setText("Check In");
             jLabel3.setVisible(false);

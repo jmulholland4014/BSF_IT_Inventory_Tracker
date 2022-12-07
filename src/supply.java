@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import javax.swing.table.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,6 +13,7 @@ import java.util.HashMap;
 public class supply extends javax.swing.JFrame {
     Backend backend = new Backend();
     String serialNumber = "";
+    String type;
     
     /**
      * 
@@ -24,52 +26,113 @@ public class supply extends javax.swing.JFrame {
         fillFields(deviceHashMap);
     }
 
-    public void fillFields(HashMap<String, String> deviceHashMap){
+    public void fillFields(HashMap<String, String> info){
         
+        jBarcode.setText(info.get("barcode"));
+        jBrand.setText(info.get("brand"));
+        jColor.setText(info.get("color"));
+        jCost.setText(info.get("cost"));
+        jCondition.setText(info.get("condition"));
+        jGraphic.setText(info.get("graphic_card"));
+        jIssues.setText(info.get("issue"));
+        jMemory.setText(info.get("memory"));
+        jModel.setText(info.get("model"));
+        jProcessor.setText(info.get("processor"));
+        jScreenSize.setText(info.get("screen_size"));
+        jSupplier.setText(info.get("supplier"));
+        jMemory1.setText(info.get("location"));
+        jMemory2.setText(info.get("status"));
+        jOS.setText(info.get("os"));
+        jWarranty.setText(info.get("warranty"));
+        jWeight.setText(info.get("weight"));
+        jPurchaseDate.setText(info.get("purchase_date"));
+        jTitle.setText(info.get("type") + " - "+ info.get("serial_number"));
+        this.type = info.get("type");
         
-        setTypeOfDevice(deviceHashMap.get("deviceType"));
-        warrantyFld.setText(deviceHashMap.get("warrantyInformation"));
-        barcodeFld.setText(deviceHashMap.get("barcode"));
-        modelFld.setText(deviceHashMap.get("model"));
-        SNFld.setText(deviceHashMap.get("SN"));
-        dateFld.setText(deviceHashMap.get("dateAcquired"));
-        costFld.setText(deviceHashMap.get("cost"));
-        conditionFld.setText(deviceHashMap.get("condition"));
-        issuesFld.setText(deviceHashMap.get("issues"));
-        statusFld.setText(deviceHashMap.get("status"));
-        passwordFld.setText(deviceHashMap.get("password"));
-        setHasKeyboard(deviceHashMap.get("hasKeyboard"));
-        setHasMouse(deviceHashMap.get("hasMouse"));
-        weightFld.setText(deviceHashMap.get("weight"));
-    }
-
-    public void setHasKeyboard(String hasKeyboard){
-        if(hasKeyboard.equals("Yes")){
-            hasKeyboardRBtn.setSelected(true);
+        if (type.equals("PC")) {
+            jLabel29.setText("Username");
+            jLabel27.setText("Password");
+            jLabel28.setVisible(false);
+            jTextField22.setVisible(false);
         }
-        else{
-            hasKeyboardRBtn.setSelected(false);
+        
+        if (type.equals("Chromebook")) {
+            jLabel29.setText("Username");
+            jLabel27.setText("Password");
+            jLabel28.setText("eMCC");
         }
-    }
-
-    public void setHasMouse(String hasMouse){
-        if(hasMouse.equals("Yes")){
-            hasMouseRBtn.setSelected(true);
+        
+        if (type.equals("IPad")) {
+            jLabel29.setText("Model Number");
+            jLabel27.setText("Passcode");
+            jLabel28.setText("Software Version");
         }
-        else{
-            hasMouseRBtn.setSelected(false);
+        
+        jTextField10.setText(info.get("extraField1"));
+        jMemory3.setText(info.get("extraField2"));
+        System.out.println(info.get("extraField3"));
+        System.out.println(info.get("type"));
+        if (info.get("type").equals("IPad") || info.get("type").equals("Chromebook")) {
+            jTextField22.setText(info.get("extraField3"));
         }
-    }
-
-    public void setTypeOfDevice(String type){
-        if(type == "IPAD"){
-            iPadRBtn.setSelected(true);
+        
+        // Accessories
+        if (info.containsKey("keyboard")) {
+            jRadioButton4.setSelected(true);
         }
-        else if(type == "PC"){
-            PCRBtn.setSelected(true);
+        if (info.containsKey("mouse")) {
+            jRadioButton6.setSelected(true);
         }
-        else{
-            CBRBtn.setSelected(true);
+        if (info.containsKey("headphones")) {
+            jRadioButton8.setSelected(true);
+        }
+        if (info.containsKey("stylus")) {
+            jRadioButton10.setSelected(true);
+        }
+        
+        // Maintenance (issue, location, by, at, cost)
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i =1; i < 4; i++) {
+            if (info.containsKey("mRecord"+i+".issue")) {
+                model.setValueAt(info.get("mRecord"+i+".issue"), i-1, 0);
+            }
+            if (info.containsKey("mRecord"+i+".location")) {
+                model.setValueAt(info.get("mRecord"+i+".location"), i-1, 1);
+            }
+            if (info.containsKey("mRecord"+i+".by")) {
+                model.setValueAt(info.get("mRecord"+i+".by"), i-1, 2);
+            }
+            if (info.containsKey("mRecord"+i+".at")) {
+                model.setValueAt(info.get("mRecord"+i+".at"), i-1, 3);
+            }
+            if (info.containsKey("mRecord"+i+".cost")) {
+                model.setValueAt(info.get("mRecord"+i+".cost"), i-1, 4);
+            }
+        }
+        
+        // Checkout (time, admin, to, condition, return time, admin, condition)
+        model = (DefaultTableModel)jTable2.getModel();
+        
+        if (info.containsKey("checkout_time")) {
+                model.setValueAt(info.get("checkout_time"), 0, 0);
+        }
+        if (info.containsKey("admin_out")) {
+                model.setValueAt(info.get("admin_out"), 0, 1);
+        }
+        if (info.containsKey("checked_to")) {
+                model.setValueAt(info.get("checked_to"), 0, 2);
+        }
+        if (info.containsKey("out_condition")) {
+                model.setValueAt(info.get("out_condition"), 0, 3);
+        }
+        if (info.containsKey("return_time")) {
+                model.setValueAt(info.get("return_time"), 0, 4);
+        }
+        if (info.containsKey("admin_in")) {
+                model.setValueAt(info.get("admin_in"), 0, 5);
+        }
+        if (info.containsKey("in_condition")) {
+                model.setValueAt(info.get("in_condition"), 0, 6);
         }
     }
 
@@ -85,8 +148,8 @@ public class supply extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jTitle = new javax.swing.JLabel();
-        updateBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -121,7 +184,7 @@ public class supply extends javax.swing.JFrame {
         jModel = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jSerial = new javax.swing.JTextField();
+        jOS = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jPurchaseDate = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -145,18 +208,15 @@ public class supply extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel29 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setEnabled(false);
 
+        jTitle.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         jTitle.setText("Type-serial number");
-
-        updateBtn.setText("Edit");
-        updateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtnActionPerformed(evt);
-            }
-        });
 
         jLabel27.setText("Software Version");
 
@@ -182,6 +242,7 @@ public class supply extends javax.swing.JFrame {
         jSupplier.setText("Apple");
         jSupplier.setEnabled(false);
 
+        jLabel12.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         jLabel12.setText("Maintenance History (Latest 3):");
 
         jTextField10.setEnabled(false);
@@ -231,7 +292,7 @@ public class supply extends javax.swing.JFrame {
 
         jLabel6.setText("OS");
 
-        jSerial.setEnabled(false);
+        jOS.setEnabled(false);
 
         jLabel7.setText("Purchase Date");
 
@@ -247,36 +308,44 @@ public class supply extends javax.swing.JFrame {
 
         jLabel13.setText("Has Keyboard:");
 
+        buttonGroup1.add(jRadioButton4);
         jRadioButton4.setText("Yes");
         jRadioButton4.setEnabled(false);
 
+        buttonGroup1.add(jRadioButton5);
         jRadioButton5.setSelected(true);
         jRadioButton5.setText("No");
         jRadioButton5.setEnabled(false);
 
         jLabel14.setText("Has Mouse:");
 
+        buttonGroup2.add(jRadioButton6);
         jRadioButton6.setText("Yes");
         jRadioButton6.setEnabled(false);
 
+        buttonGroup2.add(jRadioButton7);
         jRadioButton7.setSelected(true);
         jRadioButton7.setText("No");
         jRadioButton7.setEnabled(false);
 
         jLabel16.setText("Has Headphones:");
 
+        buttonGroup3.add(jRadioButton8);
         jRadioButton8.setText("Yes");
         jRadioButton8.setEnabled(false);
 
+        buttonGroup3.add(jRadioButton9);
         jRadioButton9.setSelected(true);
         jRadioButton9.setText("No");
         jRadioButton9.setEnabled(false);
 
         jLabel17.setText("Has Stylus:");
 
+        buttonGroup4.add(jRadioButton10);
         jRadioButton10.setText("Yes");
         jRadioButton10.setEnabled(false);
 
+        buttonGroup4.add(jRadioButton11);
         jRadioButton11.setSelected(true);
         jRadioButton11.setText("No");
         jRadioButton11.setEnabled(false);
@@ -287,16 +356,14 @@ public class supply extends javax.swing.JFrame {
 
         jMemory3.setEnabled(false);
 
-        jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
-                "Issue", "Cost", "Fixed By", "Fix Date", "Cost"
+                "Issue", "Location", "Fixed By", "Fix Date", "Cost"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -311,10 +378,42 @@ public class supply extends javax.swing.JFrame {
 
         jLabel29.setText("Passcode");
 
+        jLabel15.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jLabel15.setText("Last Checkout");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Checkout Time", "Checkout Admin", "Checked out to", "Checkout Condition", "Return Time", "Return Admin", "Return Condition"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jBtn.setText("Edit");
+        jBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(498, 498, 498))
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +438,7 @@ public class supply extends javax.swing.JFrame {
                             .addComponent(jCondition, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCost, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPurchaseDate, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSerial, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jOS, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jModel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBarcode, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jWarranty, javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,6 +481,7 @@ public class supply extends javax.swing.JFrame {
                         .addContainerGap(378, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
                             .addComponent(jLabel12)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel13)
@@ -406,20 +506,17 @@ public class supply extends javax.swing.JFrame {
                             .addComponent(jLabel16)
                             .addComponent(jLabel14)
                             .addComponent(jLabel17)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(498, 498, 498))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(228, 228, 228)
                         .addComponent(jTitle))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(416, 416, 416)
-                        .addComponent(updateBtn)))
+                        .addGap(460, 460, 460)
+                        .addComponent(jBtn)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -446,7 +543,7 @@ public class supply extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jSerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -500,9 +597,9 @@ public class supply extends javax.swing.JFrame {
                             .addComponent(jScreenSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel24)
-                            .addComponent(jMemory2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jMemory2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel25)
@@ -546,10 +643,14 @@ public class supply extends javax.swing.JFrame {
                         .addComponent(jRadioButton10)
                         .addComponent(jRadioButton11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
-                .addComponent(updateBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
@@ -557,51 +658,66 @@ public class supply extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+    private void jBtnActionPerformed(java.awt.event.ActionEvent evt) {                                     
         // TODO add your handling code here:
-        String warranty = warrantyFld.getText();
-        String barcode = barcodeFld.getText();
-        String model = modelFld.getText();
-        String serialNumber = SNFld.getText();
-        String date = dateFld.getText();
-        String cost = costFld.getText();
-        String condition = conditionFld.getText();
-        String issues = issuesFld.getText();
-        String status = statusFld.getText();
-        String password = passwordFld.getText();
-        String hasKeyboard = "";
-        String hasMouse = "";
-        String weight = weightFld.getText();
-        
-        if(hasKeyboardRBtn.isSelected()){
-            hasKeyboard = "Yes";
-        }else{
-            hasKeyboard = "No";
-        }
-        
-        if(hasMouseRBtn.isSelected()){
-            hasMouse = "Yes";
-        }else{
-            hasMouse = "No";
-        }
-        HashMap<String,String> data = new HashMap<String,String>();
-        data.put("warranty", warranty);
-        data.put("barcode", barcode);
-        data.put("model", model);
-        data.put("SN", serialNumber);
-        data.put("dateAcquired", date);
-        data.put("cost", cost);
-        data.put("condition", condition);
-        data.put("issues", issues);
-        data.put("status", status);
-        data.put("password", password);
-        data.put("hasKeyboard", hasKeyboard);
-        data.put("hasMouse", hasMouse);
-        data.put("weight", weight);
-        backend.updateDeviceInformation(supplyID, data);
-        this.setVisible(false);
-    }//GEN-LAST:event_updateBtnActionPerformed
+        System.out.println(jBtn.getText());
+        if (jBtn.getText().equals("Edit")) {
+            jCost.setEnabled(true);
+            jCondition.setEnabled(true);
+            jWeight.setEnabled(true);
+            jSupplier.setEnabled(true);
+            jTextField10.setEnabled(true);
+            jBrand.setEnabled(true);
+            jColor.setEnabled(true);
+            jIssues.setEnabled(true);
+            jGraphic.setEnabled(true);
+            jMemory.setEnabled(true);
+            jScreenSize.setEnabled(true);
+            jWarranty.setEnabled(true);
+            jBarcode.setEnabled(true);
+            jProcessor.setEnabled(true);
+            jModel.setEnabled(true);
+            jOS.setEnabled(true);
+            jPurchaseDate.setEnabled(true);
+            jMemory1.setEnabled(true);
+            jMemory2.setEnabled(true);
+            jMemory3.setEnabled(true);
+            jRadioButton4.setEnabled(true);
+            jRadioButton5.setEnabled(true);
+            jRadioButton6.setEnabled(true);
+            jRadioButton7.setEnabled(true);
+            jRadioButton8.setEnabled(true);
+            jRadioButton9.setEnabled(true);
+            jRadioButton10.setEnabled(true);
+            jRadioButton11.setEnabled(true);
+            jTextField22.setEnabled(true);
 
+            jLabel12.setVisible(false);
+            jLabel15.setVisible(false);
+            jScrollPane1.setVisible(false);
+            jScrollPane2.setVisible(false);
+
+            jBtn.setText("Update");
+
+        } else {
+            double cost = Double.parseDouble(jCost.getText());
+            double weight = Double.parseDouble(jWeight.getText());
+            double screenSize = Double.parseDouble(jScreenSize.getText());
+            backend.updateDeviceInformation(type, this.serialNumber, jSupplier.getText(), jPurchaseDate.getText(),
+                                 jBarcode.getText(), jBrand.getText(), jCondition.getText(),
+                                 jColor.getText(), cost, jIssues.getText(), jGraphic.getText(),
+                                 jMemory.getText(), jModel.getText(), jProcessor.getText(), screenSize, jMemory1.getText(), jOS.getText(),
+                                 jWarranty.getText(), jMemory1.getText(), weight, jTextField10.getText(), jMemory3.getText(),
+                                 jTextField22.getText(), 
+                                 jRadioButton4.isSelected(),
+                                 jRadioButton6.isSelected(),
+                                 jRadioButton8.isSelected(),
+                                 jRadioButton10.isSelected());
+            this.setVisible(false);
+        }
+    }                                         
+
+    
     /**
      * @param args the command line arguments
      */
@@ -630,19 +746,21 @@ public class supply extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new supply().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new supply().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JTextField jBarcode;
     private javax.swing.JTextField jBrand;
+    private javax.swing.JButton jBtn;
     private javax.swing.JTextField jColor;
     private javax.swing.JTextField jCondition;
     private javax.swing.JTextField jCost;
@@ -653,6 +771,7 @@ public class supply extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -679,6 +798,7 @@ public class supply extends javax.swing.JFrame {
     private javax.swing.JTextField jMemory2;
     private javax.swing.JTextField jMemory3;
     private javax.swing.JTextField jModel;
+    private javax.swing.JTextField jOS;
     private javax.swing.JTextField jProcessor;
     private javax.swing.JTextField jPurchaseDate;
     private javax.swing.JRadioButton jRadioButton10;
@@ -691,15 +811,15 @@ public class supply extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JTextField jScreenSize;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jSerial;
     private javax.swing.JTextField jSupplier;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JLabel jTitle;
     private javax.swing.JTextField jWarranty;
     private javax.swing.JTextField jWeight;
-    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -223,7 +223,7 @@ public class newSupply extends javax.swing.JFrame {
 
         jLabel27.setText("Software Version");
 
-        jLabel28.setText("eMMC:");
+        jLabel28.setText("Model Number");
 
         jLabel29.setText("OS");
 
@@ -304,10 +304,10 @@ public class newSupply extends javax.swing.JFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel22)
                                                     .addComponent(jLabel23))
-                                                .addGap(39, 39, 39)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jScreenSize, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jMemory, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGap(64, 64, 64)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jMemory, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jScreenSize, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                         .addGap(157, 157, 157))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,7 +545,7 @@ public class newSupply extends javax.swing.JFrame {
                              jColor.getText(), cost, jIssues.getText(), jGraphic.getText(),
                              jMemory.getText(), jModel.getText(), jProcessor.getText(), screenSize, jStatus.getText(),
                              jWarranty.getText(), location, weight, jTextField10.getText(), jTextField20.getText(),
-                             jTextField22.getText(), 
+                             jTextField22.getText(), jOS.getText(),
                              jRadioButton4.isSelected(),
                              jRadioButton6.isSelected(),
                              jRadioButton8.isSelected(),

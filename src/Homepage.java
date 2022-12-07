@@ -60,14 +60,10 @@ public class Homepage extends javax.swing.JFrame {
         mtncIDTxt = new javax.swing.JTextField();
         searchBtn4 = new javax.swing.JButton();
         createRepairBtn = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        issueLbl = new javax.swing.JLabel();
-        costLbl = new javax.swing.JLabel();
-        fixedByLbl = new javax.swing.JLabel();
-        fixedDateLbl = new javax.swing.JLabel();
-        deviceSNLbl = new javax.swing.JLabel();
-        locationLbl = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
         SuppliersPnl = new javax.swing.JPanel();
         supplierTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -137,75 +133,49 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Serial Number");
 
-        issueLbl.setText("Issue");
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Issue", "Location", "Fixed By", "Fix Date", "Cost"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        costLbl.setText("Cost");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
 
-        fixedByLbl.setText("Fixed By");
-
-        fixedDateLbl.setText("When It was Fixed?");
-
-        deviceSNLbl.setText("Device SN");
-
-        locationLbl.setText("Location");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(issueLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(costLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fixedByLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(locationLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deviceSNLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fixedDateLbl)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(issueLbl)
-                    .addComponent(costLbl)
-                    .addComponent(fixedByLbl)
-                    .addComponent(fixedDateLbl)
-                    .addComponent(deviceSNLbl)
-                    .addComponent(locationLbl))
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-
-        jLabel6.setText("Maintenance Number");
+        jLabel12.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jLabel12.setText("Maintenance History (Latest 3):");
 
         javax.swing.GroupLayout MaintenancePnlLayout = new javax.swing.GroupLayout(MaintenancePnl);
         MaintenancePnl.setLayout(MaintenancePnlLayout);
         MaintenancePnlLayout.setHorizontalGroup(
             MaintenancePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MaintenancePnlLayout.createSequentialGroup()
-                .addGroup(MaintenancePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MaintenancePnlLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MaintenancePnlLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                .addGap(80, 80, 80)
+                .addGroup(MaintenancePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(MaintenancePnlLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(mtncIDTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchBtn4)
                         .addGap(18, 18, 18)
-                        .addComponent(createRepairBtn)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(30, 30, 30))
+                        .addComponent(createRepairBtn)))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
         MaintenancePnlLayout.setVerticalGroup(
             MaintenancePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,9 +186,11 @@ public class Homepage extends javax.swing.JFrame {
                     .addComponent(searchBtn4)
                     .addComponent(createRepairBtn)
                     .addComponent(jLabel6))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel12)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(803, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(706, Short.MAX_VALUE))
         );
 
         jPanel1.add(MaintenancePnl, "card2");
@@ -517,7 +489,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewItemLbl2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -554,7 +526,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(empIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBtn3)
-                .addGap(26, 26, 26)
+                .addGap(56, 56, 56)
                 .addComponent(createUserBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -771,12 +743,25 @@ public class Homepage extends javax.swing.JFrame {
                 model.setValueAt(result.get("access"), 0, 6);
             }
             if(dataRequested.equals("maintenance")){
-                issueLbl.setText(result.get("issue"));
-                costLbl.setText(result.get("cost"));
-                fixedByLbl.setText(result.get("fixedBy"));
-                deviceSNLbl.setText(result.get("deviceSN"));
-                fixedDateLbl.setText(result.get("fixedDate"));
-                locationLbl.setText(result.get("location"));
+                
+                DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+                for (int i =1; i < 4; i++) {
+                    if (result.containsKey("mRecord"+i+".issue")) {
+                        model.setValueAt(result.get("mRecord"+i+".issue"), i-1, 0);
+                    }
+                    if (result.containsKey("mRecord"+i+".location")) {
+                        model.setValueAt(result.get("mRecord"+i+".location"), i-1, 1);
+                    }
+                    if (result.containsKey("mRecord"+i+".by")) {
+                        model.setValueAt(result.get("mRecord"+i+".by"), i-1, 2);
+                    }
+                    if (result.containsKey("mRecord"+i+".at")) {
+                        model.setValueAt(result.get("mRecord"+i+".at"), i-1, 3);
+                    }
+                    if (result.containsKey("mRecord"+i+".cost")) {
+                        model.setValueAt(result.get("mRecord"+i+".cost"), i-1, 4);
+                    }
+                }
             }
         }
     }//GEN-LAST:event_searchBtnActionPerformed
@@ -911,21 +896,17 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel UsersPnl;
     private javax.swing.JButton ViewSuppliersBtn;
     private javax.swing.JButton checkOutBtn;
-    private javax.swing.JLabel costLbl;
     private javax.swing.JButton createRepairBtn;
     private javax.swing.JButton createSupplierBtn;
     private javax.swing.JButton createUserBtn;
     private javax.swing.JLabel currOwnerLbl;
     private javax.swing.JLabel deviceLbl;
-    private javax.swing.JLabel deviceSNLbl;
     private javax.swing.JTextField empIDText;
-    private javax.swing.JLabel fixedByLbl;
-    private javax.swing.JLabel fixedDateLbl;
     private javax.swing.JButton hamburgerBtn;
-    private javax.swing.JLabel issueLbl;
     private javax.swing.JLabel itemModelLbl;
     private javax.swing.JLabel itemNameLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
@@ -935,11 +916,11 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel locationLbl;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField mtncIDTxt;
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JButton registerSupply;

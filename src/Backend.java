@@ -133,17 +133,18 @@ public class Backend {
                     }
                     break;
                 case "maintenance":
-                    rs = stmt.executeQuery ("SELECT issue, cost, technician_name, serial_number, fixed_at, location "+
+                    rs = stmt.executeQuery ("SELECT issue, cost, technician_name, location, fixed_at "+
                                             "FROM Maintenance_Record "+
-                                            "WHERE record_no= " + ID);
-                    while (rs.next()) {
-                        result.put("issue", rs.getObject(1).toString());
-                        result.put("cost", rs.getObject(2).toString());
-                        result.put("fixedBy", rs.getObject(3).toString());
-                        result.put("deviceSN", rs.getObject(4).toString());
-                        result.put("fixedDate", rs.getObject(5).toString());
-                        result.put("location", rs.getObject(6).toString());
-                    }
+                                            "WHERE serial_number= '" + ID+"' ORDER BY fixed_at DESC LIMIT 3");
+                    int i =1;
+                    while(rs.next()){
+
+                        result.put("mRecord" + i + "."+"issue", rs.getObject("issue").toString());
+                        result.put("mRecord" + i + "."+"cost", rs.getObject("cost").toString());
+                        result.put("mRecord" + i + "."+"by", rs.getObject("technician_name").toString());
+                        result.put("mRecord" + i + "."+"location", rs.getObject("location").toString());
+                        result.put("mRecord" + i + "."+"at", rs.getObject("fixed_at").toString());
+                    }   
                     break;
                 default:
                    System.err.println ("Invalid Argument!"); 

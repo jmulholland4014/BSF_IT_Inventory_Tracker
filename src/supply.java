@@ -706,7 +706,7 @@ public class supply extends javax.swing.JFrame {
             backend.updateDeviceInformation(type, this.serialNumber, jSupplier.getText(), jPurchaseDate.getText(),
                                  jBarcode.getText(), jBrand.getText(), jCondition.getText(),
                                  jColor.getText(), cost, jIssues.getText(), jGraphic.getText(),
-                                 jMemory.getText(), jModel.getText(), jProcessor.getText(), screenSize, jMemory1.getText(), jOS.getText(),
+                                 jMemory.getText(), jModel.getText(), jProcessor.getText(), screenSize, jMemory2.getText(), jOS.getText(),
                                  jWarranty.getText(), jMemory1.getText(), weight, jTextField10.getText(), jMemory3.getText(),
                                  jTextField22.getText(), 
                                  jRadioButton4.isSelected(),

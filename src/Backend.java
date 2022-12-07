@@ -44,7 +44,10 @@ public class Backend {
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            return stmt.executeQuery ("Select Admin_ID, access_level from Admin where username ='" + username + "' and password ='" + password+ "'");
+            return stmt.executeQuery ("Select Admin_ID, access_level "+ 
+                                      "FROM Admin "+
+                                      "JOIN Employee ON Admin_ID = Employee_ID " +
+                                      "WHERE username ='" + username + "' AND password ='" + password+ "' AND is_active = 1");
         }
         catch (SQLException e) {
             System.err.println (e);
@@ -114,13 +117,19 @@ public class Backend {
                     }
                     break;
                 case "users":
-                    rs = stmt.executeQuery ("SELECT name, serial_number " +
+                    rs = stmt.executeQuery ("SELECT name, SSN, address, email, phone, is_active, location_address, access_level " +
                                             "FROM Employee e " +
-                                            "LEFT OUTER JOIN Check_Out_Record using(Employee_ID) " +
+                                            "LEFT OUTER JOIN Admin ON e.Employee_ID = Admin_ID " +
                                             "WHERE e.Employee_ID = " + ID + "");
                     while (rs.next()) {
-                        result.put("Name", rs.getObject(1).toString());
-                        result.put("Devices", rs.getObject(2) == null ? "None" : rs.getObject(2).toString());
+                        result.put("name", rs.getObject(1).toString());
+                        result.put("ssn", rs.getObject(2).toString());
+                        result.put("address", rs.getObject(3).toString());
+                        result.put("email", rs.getObject(4).toString());
+                        result.put("phone", rs.getObject(5).toString());
+                        result.put("is_active", rs.getObject(6).toString());
+                        result.put("location", rs.getObject(7).toString());
+                        result.put("access", rs.getObject(8) == null ? "Employee" : rs.getObject(8).toString());
                     }
                     break;
                 case "maintenance":
@@ -603,8 +612,38 @@ public class Backend {
     public HashMap<String,String> getSupplierInformation(String name){
         return null;
     }
-    //Removes a supplier from the Database given the name.
-    public void deleteSupplier(String name){
+    
+    public boolean userHasDevice(String empId){
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Check_Out_Record " +
+                                             "WHERE Employee_ID = " + empId + " AND return_time IS NULL");
+            
+            if (rs.next()){
+                return true;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println (e);
+        } 
+        
+        return false;
+    }
+    
+    public void updateUserStatus(String empId, boolean activate) {
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+
+            stmt.executeUpdate("UPDATE Employee " +
+                               "SET is_active = " + (activate ? 1 : 0) +
+                               " WHERE Employee_ID = " + empId + "");
+            
+        } catch (SQLException e) {
+            System.err.println (e);
+        } 
     }
     
 }

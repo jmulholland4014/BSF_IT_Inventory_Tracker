@@ -110,17 +110,17 @@ public class Login extends javax.swing.JFrame {
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         String username = userText.getText();
         ResultSet rs = backend.getAdminByCredentials(username, jPasswordField1.getText());
-        if (rs != null){
-            try {
-                rs.next();
+        
+        try {
+            if (rs.next()){
                 Homepage hp = new Homepage(Integer.parseInt(rs.getObject(1).toString()), rs.getObject(2).toString());
                 hp.setVisible(true);
-                this.setVisible(false);
-            } catch (SQLException e) {
-                System.err.println(e.toString());
+                this.setVisible(false);            
+            } else{
+                incorrectLoginLabel.setText("Username or Password incorrect");
             }
-        } else{
-            incorrectLoginLabel.setText("Username or Password incorrect");
+        } catch (SQLException e) {
+                System.err.println(e.toString());
         }
     }//GEN-LAST:event_LoginBtnActionPerformed
 

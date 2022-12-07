@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -31,6 +33,7 @@ public class Homepage extends javax.swing.JFrame {
         // Only Supervisors can create users
         if(accessLevel.equals("Admin")){
             createUserBtn.setVisible(false);
+            viewItemLbl2.setVisible(false);
         }
     }
     
@@ -63,7 +66,6 @@ public class Homepage extends javax.swing.JFrame {
         fixedByLbl = new javax.swing.JLabel();
         fixedDateLbl = new javax.swing.JLabel();
         deviceSNLbl = new javax.swing.JLabel();
-        showMaitenanceBtn = new javax.swing.JButton();
         locationLbl = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         SuppliersPnl = new javax.swing.JPanel();
@@ -96,9 +98,9 @@ public class Homepage extends javax.swing.JFrame {
         empIDText = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        empNameLbl = new javax.swing.JLabel();
-        empDevicesLbl = new javax.swing.JLabel();
         viewItemLbl2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         searchBtn3 = new javax.swing.JButton();
         createUserBtn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -147,13 +149,6 @@ public class Homepage extends javax.swing.JFrame {
 
         deviceSNLbl.setText("Device SN");
 
-        showMaitenanceBtn.setText("Update");
-        showMaitenanceBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showMaitenanceBtnActionPerformed(evt);
-            }
-        });
-
         locationLbl.setText("Location");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -161,9 +156,7 @@ public class Homepage extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(showMaitenanceBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(88, 88, 88)
                 .addComponent(issueLbl)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(costLbl)
@@ -187,9 +180,8 @@ public class Homepage extends javax.swing.JFrame {
                     .addComponent(fixedByLbl)
                     .addComponent(fixedDateLbl)
                     .addComponent(deviceSNLbl)
-                    .addComponent(showMaitenanceBtn)
                     .addComponent(locationLbl))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jLabel6.setText("Maintenance Number");
@@ -212,7 +204,7 @@ public class Homepage extends javax.swing.JFrame {
                         .addComponent(searchBtn4)
                         .addGap(18, 18, 18)
                         .addComponent(createRepairBtn)
-                        .addGap(0, 220, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         MaintenancePnlLayout.setVerticalGroup(
@@ -226,7 +218,7 @@ public class Homepage extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(304, Short.MAX_VALUE))
+                .addContainerGap(803, Short.MAX_VALUE))
         );
 
         jPanel1.add(MaintenancePnl, "card2");
@@ -487,16 +479,34 @@ public class Homepage extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        empNameLbl.setText("NAME");
-
-        empDevicesLbl.setText("Devices Owned: ");
-
-        viewItemLbl2.setText("View");
+        viewItemLbl2.setText("Deactivate");
+        viewItemLbl2.setEnabled(false);
         viewItemLbl2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewItemLbl2ActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setAutoscrolls(true);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Status", "Name", "SSN", "Address", "Phone", "Email", "Access"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -504,22 +514,19 @@ public class Homepage extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(viewItemLbl2)
-                .addGap(76, 76, 76)
-                .addComponent(empNameLbl)
-                .addGap(44, 44, 44)
-                .addComponent(empDevicesLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(viewItemLbl2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(empNameLbl)
-                    .addComponent(empDevicesLbl)
-                    .addComponent(viewItemLbl2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(viewItemLbl2)
+                .addContainerGap(339, Short.MAX_VALUE))
         );
 
         searchBtn3.setText("Search");
@@ -547,9 +554,9 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(empIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBtn3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(createUserBtn)
-                .addGap(30, 30, 30))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         UsersPnlLayout.setVerticalGroup(
@@ -680,7 +687,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_checkOutBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        System.out.println("Searched");
+
         String dataRequested = "";
         if(SuppliesPnl.isVisible()){
             dataRequested = "supplies";
@@ -746,8 +753,22 @@ public class Homepage extends javax.swing.JFrame {
                 suppliesLbl.setText(result.get("itemsSupplied"));
             }
             if(dataRequested.equals("users")){
-                empNameLbl.setText(result.get("Name"));
-                empDevicesLbl.setText(result.get("Devices"));
+                DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+                System.out.print(result.get("is_active"));
+                if (result.get("is_active").equals("1")) {
+                    model.setValueAt("Active", 0, 0);
+                    viewItemLbl2.setText("Deactivate");
+                } else {
+                    model.setValueAt("Inactive", 0, 0);
+                    viewItemLbl2.setText("Activate");
+                }
+                viewItemLbl2.setEnabled(true);
+                model.setValueAt(result.get("name"), 0, 1);
+                model.setValueAt(result.get("ssn"), 0, 2);
+                model.setValueAt(result.get("address"), 0, 3);
+                model.setValueAt(result.get("email"), 0, 5);
+                model.setValueAt(result.get("phone"), 0, 4);
+                model.setValueAt(result.get("access"), 0, 6);
             }
             if(dataRequested.equals("maintenance")){
                 issueLbl.setText(result.get("issue"));
@@ -779,12 +800,6 @@ public class Homepage extends javax.swing.JFrame {
     private void hamburgerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hamburgerBtnActionPerformed
         sideBarPnl.setVisible(true);
     }//GEN-LAST:event_hamburgerBtnActionPerformed
-
-    private void viewItemLbl2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemLbl2ActionPerformed
-        String empID = empIDText.getText();
-        employee employee = new employee(empID);
-        employee.setVisible(true);
-    }//GEN-LAST:event_viewItemLbl2ActionPerformed
 
     private void createUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserBtnActionPerformed
         newUser newUser = new newUser(1);
@@ -820,12 +835,6 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_empIDText1ActionPerformed
 
-    private void showMaitenanceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMaitenanceBtnActionPerformed
-        maintenance maintenance = new maintenance(issueLbl.getText(), costLbl.getText(), fixedByLbl.getText(), deviceSNLbl.getText(),fixedDateLbl.getText(), locationLbl.getText() );
-        maintenance.setVisible(true);
-        
-    }//GEN-LAST:event_showMaitenanceBtnActionPerformed
-
     private void viewItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemBtnActionPerformed
         supply supply = new supply(supplyTxt.getText());
         supply.setVisible(true);
@@ -845,6 +854,20 @@ public class Homepage extends javax.swing.JFrame {
         newSupplier newSupplier = new newSupplier();
         newSupplier.setVisible(true);
     }//GEN-LAST:event_createSupplierBtnActionPerformed
+
+    private void viewItemLbl2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemLbl2ActionPerformed
+        String empID = empIDText.getText();
+        
+        if (viewItemLbl2.getText().equals("Deactivate") 
+                && jTable1.getModel().getValueAt(0, 6).equals("Employee") 
+                && backend.userHasDevice(empID)) {
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(), 
+                                          "A Device is assigned to this Employee",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            backend.updateUserStatus(empID, viewItemLbl2.getText().equals("Activate"));
+        }
+    }//GEN-LAST:event_viewItemLbl2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -895,9 +918,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel currOwnerLbl;
     private javax.swing.JLabel deviceLbl;
     private javax.swing.JLabel deviceSNLbl;
-    private javax.swing.JLabel empDevicesLbl;
     private javax.swing.JTextField empIDText;
-    private javax.swing.JLabel empNameLbl;
     private javax.swing.JLabel fixedByLbl;
     private javax.swing.JLabel fixedDateLbl;
     private javax.swing.JButton hamburgerBtn;
@@ -916,6 +937,8 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel locationLbl;
     private javax.swing.JTextField mtncIDTxt;
     private javax.swing.JLabel passwordLbl;
@@ -924,7 +947,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton searchBtn2;
     private javax.swing.JButton searchBtn3;
     private javax.swing.JButton searchBtn4;
-    private javax.swing.JButton showMaitenanceBtn;
     private javax.swing.JPanel sideBarPnl;
     private javax.swing.JLabel supplierAddressLbl;
     private javax.swing.JLabel supplierEmailLbl;

@@ -71,7 +71,7 @@ public class maintenance extends javax.swing.JFrame {
 
         jLabel6.setText("Date Fixed");
 
-        jButton1.setText("Update/Create");
+        jButton1.setText("Create");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

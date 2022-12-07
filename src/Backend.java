@@ -203,9 +203,9 @@ public class Backend {
                 if(accessLevel ==2){
                     stmt.executeUpdate("INSERT INTO Admin (Admin_ID, access_level,username, password) VALUES ('" + ID + "', 'Admin', '" + user + "', '" + pass + "')");
                 }
-                if(accessLevel == 0){
-                    stmt.executeUpdate("DELETE FROM Employee WHERE Employee_ID = " + ID);
-                }
+            }
+            if(accessLevel == 0){
+                stmt.executeUpdate("DELETE FROM Employee WHERE Employee_ID = " + ID);
             }
             stmt.executeUpdate("UPDATE Employee SET SSN = " + SSN + ", location_address = '" + location + "', address = '" + address + "', email = '" + email + "', phone = '" + phone + "' WHERE Employee_ID = '" + ID + "'");
             

@@ -144,6 +144,7 @@ public class Backend {
                         result.put("mRecord" + i + "."+"by", rs.getObject("technician_name").toString());
                         result.put("mRecord" + i + "."+"location", rs.getObject("location").toString());
                         result.put("mRecord" + i + "."+"at", rs.getObject("fixed_at").toString());
+                        i++;
                     }   
                     break;
                 default:
@@ -480,6 +481,7 @@ public class Backend {
                 result.put("mRecord" + i + "."+"by", rs.getObject("technician_name").toString());
                 result.put("mRecord" + i + "."+"location", rs.getObject("location").toString());
                 result.put("mRecord" + i + "."+"at", rs.getObject("fixed_at").toString());
+                i++;
             }   
             
              rs = stmt.executeQuery ("SELECT checkout_time, return_time, checkout_condition, checkin_condition, " +

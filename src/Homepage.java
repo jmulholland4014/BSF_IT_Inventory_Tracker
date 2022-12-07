@@ -744,9 +744,11 @@ public class Homepage extends javax.swing.JFrame {
             }
             if(dataRequested.equals("maintenance")){
                 
+                
                 DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
                 for (int i =1; i < 4; i++) {
                     if (result.containsKey("mRecord"+i+".issue")) {
+                        System.out.println("mRecord"+i+".issue");
                         model.setValueAt(result.get("mRecord"+i+".issue"), i-1, 0);
                     }
                     if (result.containsKey("mRecord"+i+".location")) {
@@ -808,8 +810,8 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_viewRepairsBtnActionPerformed
 
     private void createRepairBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRepairBtnActionPerformed
-        maintenance maintenance = new maintenance();
-        maintenance.setVisible(true);
+        maintenance mPnl = new maintenance("","","","","","");
+        mPnl.setVisible(true);
     }//GEN-LAST:event_createRepairBtnActionPerformed
 
     private void searchBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn4ActionPerformed

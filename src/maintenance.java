@@ -16,9 +16,6 @@ public class maintenance extends javax.swing.JFrame {
     /**
      * Creates new form maintenance
      */
-    public maintenance(String ID) {
-        initComponents();
-    }
     public maintenance(String issue, String cost, String fixedBy, String deviceSN, String fixedDate, String location){
         initComponents();
         jSNTxt.setText(deviceSN);
@@ -27,9 +24,6 @@ public class maintenance extends javax.swing.JFrame {
         jFixedBy.setText(fixedBy);
         jDate.setText(fixedDate);
         jLocation.setText(location);
-    }
-    public maintenance(){
-        initComponents();
     }
 
     /**

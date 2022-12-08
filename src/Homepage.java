@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -65,15 +66,11 @@ public class Homepage extends javax.swing.JFrame {
         SuppliersPnl = new javax.swing.JPanel();
         supplierTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        supplierNameLbl = new javax.swing.JLabel();
-        supplierPhoneLbl = new javax.swing.JLabel();
-        supplierAddressLbl = new javax.swing.JLabel();
-        supplierEmailLbl = new javax.swing.JLabel();
-        suppliesLbl = new javax.swing.JLabel();
-        viewSupplierBtn = new javax.swing.JButton();
         searchBtn2 = new javax.swing.JButton();
         createSupplierBtn = new javax.swing.JButton();
+        viewSupplierBtn = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
         SuppliesPnl = new javax.swing.JPanel();
         searchBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -195,59 +192,6 @@ public class Homepage extends javax.swing.JFrame {
 
         jLabel2.setText("Supplier Name:");
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        supplierNameLbl.setText("NAME");
-
-        supplierPhoneLbl.setText("Phone");
-
-        supplierAddressLbl.setText("Address");
-
-        supplierEmailLbl.setText("Email");
-
-        suppliesLbl.setText("Supplies:");
-
-        viewSupplierBtn.setText("Update");
-        viewSupplierBtn.setEnabled(false);
-        viewSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewSupplierBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(viewSupplierBtn)
-                .addGap(76, 76, 76)
-                .addComponent(supplierNameLbl)
-                .addGap(18, 18, 18)
-                .addComponent(supplierPhoneLbl)
-                .addGap(18, 18, 18)
-                .addComponent(supplierAddressLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(supplierEmailLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(suppliesLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(supplierNameLbl)
-                    .addComponent(supplierPhoneLbl)
-                    .addComponent(supplierAddressLbl)
-                    .addComponent(supplierEmailLbl)
-                    .addComponent(suppliesLbl)
-                    .addComponent(viewSupplierBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         searchBtn2.setText("Search");
         searchBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,24 +206,56 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        viewSupplierBtn.setText("Update");
+        viewSupplierBtn.setEnabled(false);
+        viewSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewSupplierBtnActionPerformed(evt);
+            }
+        });
+
+        jScrollPane4.setAutoscrolls(true);
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Name", "Phone", "Address", "Email"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable4.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane4.setViewportView(jTable4);
+
         javax.swing.GroupLayout SuppliersPnlLayout = new javax.swing.GroupLayout(SuppliersPnl);
         SuppliersPnl.setLayout(SuppliersPnlLayout);
         SuppliersPnlLayout.setHorizontalGroup(
             SuppliersPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SuppliersPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
             .addGroup(SuppliersPnlLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(supplierTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(searchBtn2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createSupplierBtn)
+                .addGroup(SuppliersPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(SuppliersPnlLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(supplierTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchBtn2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                        .addComponent(createSupplierBtn)))
                 .addGap(60, 60, 60))
+            .addGroup(SuppliersPnlLayout.createSequentialGroup()
+                .addGap(323, 323, 323)
+                .addComponent(viewSupplierBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SuppliersPnlLayout.setVerticalGroup(
             SuppliersPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,9 +266,11 @@ public class Homepage extends javax.swing.JFrame {
                     .addComponent(supplierTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn2)
                     .addComponent(createSupplierBtn))
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(viewSupplierBtn)
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         jPanel1.add(SuppliersPnl, "card3");
@@ -450,6 +428,11 @@ public class Homepage extends javax.swing.JFrame {
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("Status");
+            jTable1.getColumnModel().getColumn(4).setHeaderValue("Phone");
+            jTable1.getColumnModel().getColumn(6).setHeaderValue("Access");
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -460,7 +443,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewItemLbl2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -692,11 +675,12 @@ public class Homepage extends javax.swing.JFrame {
                 checkOutBtn.setEnabled(true);
             }
             if(dataRequested.equals("suppliers")){
-                supplierNameLbl.setText(result.get("Name"));
-                supplierAddressLbl.setText(result.get("Address"));
-                supplierPhoneLbl.setText(result.get("Phone"));
-                supplierEmailLbl.setText(result.get("Email"));
-                suppliesLbl.setText(result.get("itemsSupplied"));
+                
+                DefaultTableModel model = (DefaultTableModel)jTable4.getModel();
+                model.setValueAt(result.get("Name"), 0, 0);
+                model.setValueAt(result.get("Phone"), 0, 1);
+                model.setValueAt(result.get("Address"), 0, 2);
+                model.setValueAt(result.get("Email"), 0, 3);
                 viewSupplierBtn.setEnabled(true);
             }
             if(dataRequested.equals("users")){
@@ -806,12 +790,16 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_registerSupplyActionPerformed
 
     private void viewSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSupplierBtnActionPerformed
-        newSupplier newSupplier = new newSupplier(supplierNameLbl.getText(), supplierPhoneLbl.getText(), supplierAddressLbl.getText(), supplierEmailLbl.getText());
+        TableModel model = jTable4.getModel();
+        newSupplier newSupplier = new newSupplier(model.getValueAt(0,0).toString(), 
+                                                  model.getValueAt(0,1).toString(), 
+                                                  model.getValueAt(0,3).toString(), 
+                                                  model.getValueAt(0,2).toString());
         newSupplier.setVisible(true);
     }//GEN-LAST:event_viewSupplierBtnActionPerformed
 
     private void createSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createSupplierBtnActionPerformed
-        newSupplier newSupplier = new newSupplier();
+        newSupplier newSupplier = new newSupplier("","","","");
         newSupplier.setVisible(true);
     }//GEN-LAST:event_createSupplierBtnActionPerformed
 
@@ -886,7 +874,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -894,9 +881,11 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTextField mtncIDTxt;
     private javax.swing.JButton registerSupply;
     private javax.swing.JButton searchBtn;
@@ -904,12 +893,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton searchBtn3;
     private javax.swing.JButton searchBtn4;
     private javax.swing.JPanel sideBarPnl;
-    private javax.swing.JLabel supplierAddressLbl;
-    private javax.swing.JLabel supplierEmailLbl;
-    private javax.swing.JLabel supplierNameLbl;
-    private javax.swing.JLabel supplierPhoneLbl;
     private javax.swing.JTextField supplierTxt;
-    private javax.swing.JLabel suppliesLbl;
     private javax.swing.JTextField supplyTxt;
     private javax.swing.JButton viewItemBtn;
     private javax.swing.JButton viewItemLbl2;

@@ -684,14 +684,17 @@ public class Backend {
             System.err.println (e);
         } 
     }
-    public void updateSupplier(String Name, String Phone, String Address, String Email) {
+    
+    public void updateSupplier(String Name, String Address, String Phone, String Email) {
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
             stmt.executeUpdate("UPDATE Supplier " +
-                               "SET Name = '" + Name +"', Phone = '"+ Phone + "', " +
-                               "Address = '" + Address + "', "+
-                               "Email = '" + Email + "'");
+                               "SET Phone = '" + Phone + "', " +
+                               "Address = '" + Address + "', " +
+                               "Email = '" + Email + "' " +
+                               "WHERE Name = '" + Name + "'"
+                               );
                           
                                
         } catch (SQLException e) {

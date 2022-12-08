@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -22,10 +25,11 @@ public class newSupplier extends javax.swing.JFrame {
         jTextField1.setText(address);
         if (name.equals("")){
             jButton1.setText("Create");
-        
+            jTextField5.setEnabled(true);
         }
         else {
              jButton1.setText("Update");
+             jTextField5.setEnabled(false);
         }
     }
     
@@ -135,8 +139,13 @@ public class newSupplier extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        if (jTextField2.getText().length() != 10){
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(), "Invalid length for Phone", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (jButton1.getText().equals("Create")) {
-        backend.createSupplier(jTextField5.getText(), jTextField1.getText(), jTextField2.getText(), jTextField4.getText());
+            backend.createSupplier(jTextField5.getText(), jTextField1.getText(), jTextField2.getText(), jTextField4.getText());
         } else {
             backend.updateSupplier(jTextField5.getText(), jTextField1.getText(), jTextField2.getText(), jTextField4.getText());
         }

@@ -213,7 +213,8 @@ public class Homepage extends javax.swing.JFrame {
 
         suppliesLbl.setText("Supplies:");
 
-        viewSupplierBtn.setText("View");
+        viewSupplierBtn.setText("Update");
+        viewSupplierBtn.setEnabled(false);
         viewSupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewSupplierBtnActionPerformed(evt);
@@ -723,6 +724,7 @@ public class Homepage extends javax.swing.JFrame {
                 supplierPhoneLbl.setText(result.get("Phone"));
                 supplierEmailLbl.setText(result.get("Email"));
                 suppliesLbl.setText(result.get("itemsSupplied"));
+                viewSupplierBtn.setEnabled(true);
             }
             if(dataRequested.equals("users")){
                 DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
@@ -833,7 +835,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_registerSupplyActionPerformed
 
     private void viewSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSupplierBtnActionPerformed
-        newSupplier newSupplier = new newSupplier();
+        newSupplier newSupplier = new newSupplier(supplierNameLbl.getText(), supplierPhoneLbl.getText(), supplierAddressLbl.getText(), supplierEmailLbl.getText());
         newSupplier.setVisible(true);
     }//GEN-LAST:event_viewSupplierBtnActionPerformed
 

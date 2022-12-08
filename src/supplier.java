@@ -142,7 +142,7 @@ public class supplier extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteSupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSupplierBtnActionPerformed
-        backend.deleteSupplier(supplier);
+//        backend.deleteSupplier(supplier);
         this.setVisible(false);
     }//GEN-LAST:event_deleteSupplierBtnActionPerformed
 
@@ -176,7 +176,7 @@ public class supplier extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new supplier().setVisible(true);
+//                new supplier().setVisible(true);
             }
         });
     }

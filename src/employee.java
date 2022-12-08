@@ -343,7 +343,7 @@ public class employee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new employee(0, "", "", "" , new String[0], 0).setVisible(true);
+//                new employee(0, "", "", "" , new String[0], 0).setVisible(true);
             }
         });
     }

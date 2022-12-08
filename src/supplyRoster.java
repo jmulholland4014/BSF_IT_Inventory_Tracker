@@ -349,9 +349,9 @@ public class supplyRoster extends javax.swing.JFrame {
     }//GEN-LAST:event_checkInBtnActionPerformed
 
     private void viewItemLbl2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewItemLbl2ActionPerformed
-        String empID = empIDText.getText();
-        employee employee = new employee(accessLevel, backend.getEmployeeNameByID(empID), empID, backend.getEmployeeSSNByID(empID), backend.getEmployeeDevicesByID(empID), backend.getAccessLevelByID(empID));
-        employee.setVisible(true);
+////        String empID = empIDText.getText();
+////        employee employee = new employee(accessLevel, backend.getEmployeeNameByID(empID), empID, backend.getEmployeeSSNByID(empID), backend.getEmployeeDevicesByID(empID), backend.getAccessLevelByID(empID));
+//        employee.setVisible(true);
     }//GEN-LAST:event_viewItemLbl2ActionPerformed
 
     /**

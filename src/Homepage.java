@@ -842,7 +842,7 @@ public class Homepage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Homepage(0).setVisible(true);
+//                new Homepage(0).setVisible(true);
             }
         });
     }

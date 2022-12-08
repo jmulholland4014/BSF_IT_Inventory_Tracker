@@ -396,7 +396,7 @@ public class Homepage extends javax.swing.JFrame {
         UsersPnl.setMaximumSize(new java.awt.Dimension(517, 436));
         UsersPnl.setPreferredSize(new java.awt.Dimension(517, 436));
 
-        jLabel3.setText("Employee ID/Name:");
+        jLabel3.setText("Employee ID:");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -443,7 +443,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewItemLbl2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -705,21 +705,12 @@ public class Homepage extends javax.swing.JFrame {
                 
                 DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
                 for (int i =1; i < 4; i++) {
-                    if (result.containsKey("mRecord"+i+".issue")) {
-                        model.setValueAt(result.get("mRecord"+i+".issue"), i-1, 0);
-                    }
-                    if (result.containsKey("mRecord"+i+".location")) {
-                        model.setValueAt(result.get("mRecord"+i+".location"), i-1, 1);
-                    }
-                    if (result.containsKey("mRecord"+i+".by")) {
-                        model.setValueAt(result.get("mRecord"+i+".by"), i-1, 2);
-                    }
-                    if (result.containsKey("mRecord"+i+".at")) {
-                        model.setValueAt(result.get("mRecord"+i+".at"), i-1, 3);
-                    }
-                    if (result.containsKey("mRecord"+i+".cost")) {
-                        model.setValueAt(result.get("mRecord"+i+".cost"), i-1, 4);
-                    }
+   
+                    model.setValueAt(result.containsKey("mRecord" + i + ".issue") ? result.get("mRecord"+i+".issue") : "", i-1, 0);
+                    model.setValueAt(result.containsKey("mRecord" + i + ".location") ? result.get("mRecord"+i+".location") : "", i-1, 1);
+                    model.setValueAt(result.containsKey("mRecord" + i + ".by") ? result.get("mRecord"+i+".by") : "", i-1, 2);
+                    model.setValueAt(result.containsKey("mRecord" + i + ".at") ? result.get("mRecord"+i+".at") : "", i-1, 3);
+                    model.setValueAt(result.containsKey("mRecord" + i + ".cost") ? result.get("mRecord"+i+".cost") : "", i-1, 4);
                 }
             }
         }

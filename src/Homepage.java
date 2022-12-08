@@ -27,8 +27,6 @@ public class Homepage extends javax.swing.JFrame {
         setPanelsInvisible();
         this.userID = userID;
         this.accessLevel = accessLevel;
-        System.out.println(userID);
-        System.out.println(accessLevel);
         
         // Only Supervisors can create users
         if(accessLevel.equals("Admin")){
@@ -80,16 +78,12 @@ public class Homepage extends javax.swing.JFrame {
         searchBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         supplyTxt = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        itemNameLbl = new javax.swing.JLabel();
-        itemModelLbl = new javax.swing.JLabel();
-        deviceLbl = new javax.swing.JLabel();
-        currOwnerLbl = new javax.swing.JLabel();
-        passwordLbl = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         registerSupply = new javax.swing.JButton();
         checkOutBtn = new javax.swing.JButton();
         viewItemBtn = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         UsersPnl = new javax.swing.JPanel();
         empIDText = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -315,48 +309,6 @@ public class Homepage extends javax.swing.JFrame {
 
         jLabel1.setText("Serial Number");
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        itemNameLbl.setText("Condition");
-
-        itemModelLbl.setText("Model");
-
-        deviceLbl.setText("Type of Device");
-
-        currOwnerLbl.setText("Available");
-
-        passwordLbl.setText("Access");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(deviceLbl)
-                .addGap(26, 26, 26)
-                .addComponent(itemModelLbl)
-                .addGap(28, 28, 28)
-                .addComponent(currOwnerLbl)
-                .addGap(26, 26, 26)
-                .addComponent(passwordLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemNameLbl)
-                .addContainerGap(276, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deviceLbl)
-                    .addComponent(itemModelLbl)
-                    .addComponent(currOwnerLbl)
-                    .addComponent(passwordLbl)
-                    .addComponent(itemNameLbl))
-                .addGap(16, 16, 16))
-        );
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -391,37 +343,55 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Type", "Model", "Status", "Access", "Condition"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable3);
+
         javax.swing.GroupLayout SuppliesPnlLayout = new javax.swing.GroupLayout(SuppliesPnl);
         SuppliesPnl.setLayout(SuppliesPnlLayout);
         SuppliesPnlLayout.setHorizontalGroup(
             SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SuppliesPnlLayout.createSequentialGroup()
                 .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SuppliesPnlLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SuppliesPnlLayout.createSequentialGroup()
-                        .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SuppliesPnlLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(SuppliesPnlLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(SuppliesPnlLayout.createSequentialGroup()
-                                .addGap(66, 66, 66)
                                 .addComponent(jLabel1)
                                 .addGap(36, 36, 36)
                                 .addComponent(supplyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
                                 .addComponent(searchBtn)
-                                .addGap(41, 41, 41)
-                                .addComponent(registerSupply))
-                            .addGroup(SuppliesPnlLayout.createSequentialGroup()
-                                .addGap(298, 298, 298)
-                                .addComponent(checkOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(SuppliesPnlLayout.createSequentialGroup()
-                                .addGap(323, 323, 323)
-                                .addComponent(viewItemBtn)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(registerSupply)))))
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SuppliesPnlLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SuppliesPnlLayout.createSequentialGroup()
+                        .addComponent(viewItemBtn)
+                        .addGap(252, 252, 252))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SuppliesPnlLayout.createSequentialGroup()
+                        .addComponent(checkOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(227, 227, 227))))
         );
         SuppliesPnlLayout.setVerticalGroup(
             SuppliesPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,13 +402,13 @@ public class Homepage extends javax.swing.JFrame {
                     .addComponent(supplyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn)
                     .addComponent(registerSupply))
-                .addGap(30, 30, 30)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addComponent(checkOutBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(viewItemBtn)
-                .addGap(725, 725, 725)
+                .addGap(703, 703, 703)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -580,6 +550,7 @@ public class Homepage extends javax.swing.JFrame {
         sideBarPnl.add(ViewSuppliersBtn);
 
         viewRostersBtn.setText("View Rosters");
+        viewRostersBtn.setEnabled(false);
         viewRostersBtn.setPreferredSize(new java.awt.Dimension(125, 23));
         viewRostersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -697,11 +668,13 @@ public class Homepage extends javax.swing.JFrame {
         HashMap<String,String> result = backend.fetchPnlObjectItems(ID, dataRequested);
         if(result != null){
             if(dataRequested.equals("supplies")){
-                itemNameLbl.setText(result.get("Condition")); 
-                itemModelLbl.setText(result.get("Model"));
-                deviceLbl.setText(result.get("Type"));
-                currOwnerLbl.setText(result.get("Status"));
-                passwordLbl.setText(result.get("Access"));
+                
+                DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
+                model.setValueAt(result.get("Type"), 0, 0);
+                model.setValueAt(result.get("Model"), 0, 1);
+                model.setValueAt(result.get("Status"), 0, 2);
+                model.setValueAt(result.get("Access"), 0, 3);
+                model.setValueAt(result.get("Condition"), 0, 4);
                 
                 if (result.get("Status").equals("UNASSIGNED")) {
                     checkOutBtn.setText("Check Out");
@@ -728,7 +701,6 @@ public class Homepage extends javax.swing.JFrame {
             }
             if(dataRequested.equals("users")){
                 DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-                System.out.print(result.get("is_active"));
                 if (result.get("is_active").equals("1")) {
                     model.setValueAt("Active", 0, 0);
                     viewItemLbl2.setText("Deactivate");
@@ -750,7 +722,6 @@ public class Homepage extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
                 for (int i =1; i < 4; i++) {
                     if (result.containsKey("mRecord"+i+".issue")) {
-                        System.out.println("mRecord"+i+".issue");
                         model.setValueAt(result.get("mRecord"+i+".issue"), i-1, 0);
                     }
                     if (result.containsKey("mRecord"+i+".location")) {
@@ -791,7 +762,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_hamburgerBtnActionPerformed
 
     private void createUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserBtnActionPerformed
-        newUser newUser = new newUser(1);
+        newUser newUser = new newUser();
         newUser.setVisible(true);
     }//GEN-LAST:event_createUserBtnActionPerformed
 
@@ -854,7 +825,11 @@ public class Homepage extends javax.swing.JFrame {
                                           "A Device is assigned to this Employee",
                                           "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            backend.updateUserStatus(empID, viewItemLbl2.getText().equals("Activate"));
+            boolean activate = viewItemLbl2.getText().equals("Activate");
+            backend.updateUserStatus(empID, activate);
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(), 
+                                          "User is " + (activate ? "activated!" : "deactivated!"),
+                                          "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_viewItemLbl2ActionPerformed
 
@@ -903,12 +878,8 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton createRepairBtn;
     private javax.swing.JButton createSupplierBtn;
     private javax.swing.JButton createUserBtn;
-    private javax.swing.JLabel currOwnerLbl;
-    private javax.swing.JLabel deviceLbl;
     private javax.swing.JTextField empIDText;
     private javax.swing.JButton hamburgerBtn;
-    private javax.swing.JLabel itemModelLbl;
-    private javax.swing.JLabel itemNameLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -919,14 +890,14 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextField mtncIDTxt;
-    private javax.swing.JLabel passwordLbl;
     private javax.swing.JButton registerSupply;
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton searchBtn2;

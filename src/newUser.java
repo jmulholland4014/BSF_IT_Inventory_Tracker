@@ -1,5 +1,4 @@
-import java.util.Enumeration;
-import javax.swing.AbstractButton;
+
 import javax.swing.JOptionPane;
 
 /*
@@ -13,24 +12,11 @@ import javax.swing.JOptionPane;
  */
 public class newUser extends javax.swing.JFrame {
     Backend backend = new Backend();
-    int accessLevel;
     /**
      * Creates new form newUser
      */
-    public newUser(int aL) {
+    public newUser() {
         initComponents();
-        accessLevel = aL;
-        System.out.println("accessLevel: " + accessLevel);
-        removeHigherAccessLevels();
-    }
-
-    public void removeHigherAccessLevels(){
-//        for(Enumeration<AbstractButton> buttons = accessLevelBtnGrp.getElements(); buttons.hasMoreElements();){
-//            AbstractButton button = buttons.nextElement();
-//            if(Integer.parseInt(button.getText()) > accessLevel){
-//                button.setVisible(false);
-//            }
-//        }
     }
 
     /**
@@ -115,6 +101,8 @@ public class newUser extends javax.swing.JFrame {
 
         empLocation.setText("Employee Location:");
 
+        empLocFld.setText("6 Nashua Ct b, Essex, MD 21221");
+
         jLabel9.setText("Employee Address:");
 
         jLabel10.setText("Employee Email:");
@@ -147,7 +135,7 @@ public class newUser extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(empNameFld, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(empNameFld)
                             .addComponent(empSSNField)
                             .addComponent(empUserFld)
                             .addComponent(empLocFld)
@@ -161,7 +149,7 @@ public class newUser extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(276, 276, 276)
                         .addComponent(createUserBtn)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,6 +206,17 @@ public class newUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserBtnActionPerformed
+        
+        if (empSSNField.getText().length() != 9){
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(), "Invalid length for SSN", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (empPhone.getText().length() != 10){
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(), "Invalid length for Phone", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         backend.createEmployee(empNameFld.getText(), 
                 empSSNField.getText(), 
                 empUserFld.getText(), 

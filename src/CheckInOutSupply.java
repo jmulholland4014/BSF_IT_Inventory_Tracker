@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -122,7 +125,13 @@ public class CheckInOutSupply extends javax.swing.JFrame {
         if (checkInOutBtn.getText().equals("Check In")) {
             backend.checkInDevice(adminId, this.serialNumber, jCondition.getText());
         } else {
-            backend.checkOutDevice(Integer.parseInt(jText.getText()), adminId, this.serialNumber, jCondition.getText());
+            
+            String error = backend.validateCheckout(Integer.parseInt(jText.getText()));
+            if (error.equals("")) {
+                backend.checkOutDevice(Integer.parseInt(jText.getText()), adminId, this.serialNumber, jCondition.getText());
+            } else {
+                JOptionPane.showMessageDialog(new javax.swing.JFrame(), error, "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         this.setVisible(false);
     }//GEN-LAST:event_checkInOutBtnActionPerformed

@@ -398,6 +398,42 @@ public class Backend {
             System.err.println (e);
         } 
     }
+    
+    public String validateCheckout(int empId) {
+        
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement(); 
+            
+            // Validate employee id is valid and active
+            ResultSet rs = stmt.executeQuery("SELECT is_active FROM Employee " +
+                                "WHERE Employee_ID = " + empId );
+            
+            if (!rs.next()) {
+                return "Invalid Employee Id value!";
+            }
+            
+            if (rs.getObject(1).toString().equals("0")) {
+                return "Inactive Employee";
+            }
+            
+            
+            // Validate no other devices are checked by this employee and not returned yet
+            rs = stmt.executeQuery("SELECT serial_number FROM Check_Out_Record " +
+                                    "WHERE Employee_ID = " + empId + " AND return_time IS NULL" );
+            
+            if (rs.next()) {
+                return "Device #" + rs.getObject(1).toString() + " is already assigned to employee!";
+            }
+            
+        }
+        catch (SQLException e) {
+            System.err.println (e);
+        }
+        
+        return "";
+    }
+    
     //Returns information about the device. This should be a hashmap with the following values.
     //{deviceType, warrantyExpiration, barcode, model, SN, dateAcquired, cost, condition, knownIssues, status, password, hasKeyboard, hasMouse, weight}.
     //For has keyboard and has mouse should return "Yes" or "No".
